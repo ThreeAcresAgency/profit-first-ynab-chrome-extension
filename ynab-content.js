@@ -15,10 +15,10 @@ if (!window.profitFirstInitialized) {
         container.className = 'budget-header-item budget-header-profit-first';
         
         const button = document.createElement('button');
-        button.textContent = 'Profit First';
+        button.textContent = 'Assign Profit First Money';
         button.className = 'button button-primary';
         button.style.cssText = `
-            background-color: #23B2CE;
+            background-color: #2c396a;
             color: white;
             border: none;
             padding: 8px 12px;
@@ -26,13 +26,11 @@ if (!window.profitFirstInitialized) {
             cursor: pointer;
             font-size: 13px;
             font-weight: 500;
+            transition: background-color 0.2s;
         `;
         
         container.appendChild(button);
-        button.addEventListener('click', () => {
-            console.log('Profit First button clicked');
-            showCalculations();
-        });
+        button.addEventListener('click', showProfitFirstModal);
         
         // Insert before the days section
         headerFlexbox.insertBefore(container, daysSection);
@@ -45,16 +43,215 @@ if (!window.profitFirstInitialized) {
         return match ? match[0] : null;
     }
 
-    // Create and show modal with calculations
-    async function showCalculations() {
-        console.log('Showing calculations');
-        
-        // Get ready to assign amount from the DOM
+    // Get settings for current budget
+    async function getBudgetSettings() {
+        const budgetId = getBudgetId();
+        if (!budgetId) return null;
+
+        const settingsKey = `settings_${budgetId}`;
+        const { [settingsKey]: settings } = await chrome.storage.sync.get(settingsKey);
+        return settings;
+    }
+
+    async function showProfitFirstModal() {
+        try {
+            const settings = await getBudgetSettings();
+            if (!settings) {
+                alert('Please configure your Profit First settings first.');
+                return;
+            }
+
+            // Get ready to assign amount
+            const amount = getReadyToAssignAmount();
+            if (amount === null) {
+                alert('Could not find Ready to Assign amount.');
+                return;
+            }
+
+            // Calculate amounts
+            const amounts = {
+                tax: (amount * settings.percentages.tax) / 100,
+                ownerPay: (amount * settings.percentages.ownerPay) / 100,
+                opex: (amount * settings.percentages.opex) / 100,
+                profit: (amount * settings.percentages.profit) / 100
+            };
+
+            // Create modal content
+            const modalContent = `
+                <h2>Profit First Calculations</h2>
+                <div class="ready-to-assign">
+                    Ready to Assign
+                    <span class="amount">${formatCurrency(amount)}</span>
+                </div>
+                <div class="calculations">
+                    <div class="calc-row">
+                        <span class="label">
+                            Tax
+                            <span class="percentage">${settings.percentages.tax}%</span>
+                        </span>
+                        <span class="amount">${formatCurrency(amounts.tax)}</span>
+                    </div>
+                    <div class="calc-row">
+                        <span class="label">
+                            Owner's Pay
+                            <span class="percentage">${settings.percentages.ownerPay}%</span>
+                        </span>
+                        <span class="amount">${formatCurrency(amounts.ownerPay)}</span>
+                    </div>
+                    <div class="calc-row">
+                        <span class="label">
+                            Operations
+                            <span class="percentage">${settings.percentages.opex}%</span>
+                        </span>
+                        <span class="amount">${formatCurrency(amounts.opex)}</span>
+                    </div>
+                    <div class="calc-row">
+                        <span class="label">
+                            Profit
+                            <span class="percentage">${settings.percentages.profit}%</span>
+                        </span>
+                        <span class="amount">${formatCurrency(amounts.profit)}</span>
+                    </div>
+                </div>
+                <button id="assign-all" class="assign-button">Assign All</button>
+            `;
+
+            // Show modal with the calculated amounts and settings
+            showModal(modalContent, amounts, settings);
+        } catch (error) {
+            console.error('Error showing Profit First modal:', error);
+            alert('An error occurred while showing the Profit First calculations.');
+        }
+    }
+
+    // Helper function to show modal
+    function showModal(content, amounts, settings) {
+        // Remove any existing modals
+        const existingModal = document.querySelector('.profit-first-modal-wrapper');
+        const existingOverlay = document.querySelector('.profit-first-overlay');
+        if (existingModal) document.body.removeChild(existingModal);
+        if (existingOverlay) document.body.removeChild(existingOverlay);
+
+        // Create wrapper
+        const modalWrapper = document.createElement('div');
+        modalWrapper.className = 'profit-first-modal-wrapper';
+        modalWrapper.innerHTML = content;
+
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'profit-first-overlay';
+
+        // Close modal when clicking overlay
+        overlay.addEventListener('click', closeModal);
+
+        // Add to document
+        document.body.appendChild(overlay);
+        document.body.appendChild(modalWrapper);
+
+        // Add click handler for assign button
+        const assignButton = modalWrapper.querySelector('#assign-all');
+        if (assignButton) {
+            assignButton.addEventListener('click', async () => {
+                try {
+                    assignButton.disabled = true;
+                    assignButton.textContent = 'Assigning...';
+                    await assignAmounts(amounts, settings.categories);
+                    closeModal();
+                } catch (error) {
+                    console.error('Error assigning amounts:', error);
+                    alert('An error occurred while assigning amounts.');
+                    assignButton.disabled = false;
+                    assignButton.textContent = 'Assign All';
+                }
+            });
+        }
+    }
+
+    // Helper function to assign amounts
+    async function assignAmounts(amounts, categories) {
+        try {
+            // Get all category rows
+            const rows = Array.from(document.querySelectorAll('.budget-table-row'));
+            
+            // Map of our categories to their amounts
+            const assignments = [
+                { id: categories.tax, amount: amounts.tax },
+                { id: categories.ownerPay, amount: amounts.ownerPay },
+                { id: categories.opex, amount: amounts.opex },
+                { id: categories.profit, amount: amounts.profit }
+            ];
+
+            for (const { id, amount } of assignments) {
+                try {
+                    // Find the row for this category by data-entity-id
+                    const row = rows.find(row => row.getAttribute('data-entity-id') === id);
+
+                    if (!row) {
+                        console.error(`Could not find category with ID: ${id}`);
+                        continue;
+                    }
+
+                    // Find and click the budgeted cell to activate the input
+                    const budgetedCell = row.querySelector('.budget-table-cell-budgeted');
+                    if (!budgetedCell) {
+                        console.error(`Could not find budgeted cell for category ID: ${id}`);
+                        continue;
+                    }
+
+                    // Click the cell to activate the input
+                    budgetedCell.click();
+                    
+                    // Wait for input to be focused
+                    await new Promise(resolve => setTimeout(resolve, 100));
+
+                    // Find the actual input field - it might be in a modal or directly in the cell
+                    const input = document.activeElement;
+                    if (!input || !input.matches('input')) {
+                        console.error(`Could not find active input for category ID: ${id}`);
+                        continue;
+                    }
+
+                    // Type the plus sign and amount
+                    const formattedAmount = amount.toFixed(2);
+                    
+                    // Simulate typing each character
+                    const keys = ['+', ...formattedAmount];
+                    for (const key of keys) {
+                        // Type the character
+                        input.value += key;
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        await new Promise(resolve => setTimeout(resolve, 10));
+                    }
+                    
+                    // Press Enter to confirm
+                    input.dispatchEvent(new KeyboardEvent('keydown', {
+                        key: 'Enter',
+                        code: 'Enter',
+                        keyCode: 13,
+                        bubbles: true
+                    }));
+
+                    // Wait before moving to next category
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                } catch (error) {
+                    console.error(`Error assigning amount to category ${id}:`, error);
+                }
+            }
+
+            console.log('Finished assigning amounts');
+        } catch (error) {
+            console.error('Error in assignAmounts:', error);
+            throw error;
+        }
+    }
+
+    // Helper function to get ready to assign amount
+    function getReadyToAssignAmount() {
         const readyToAssignElement = document.querySelector('.to-be-budgeted-amount .user-data.currency');
         if (!readyToAssignElement) {
             console.log('Could not find ready to assign amount');
-            alert('Could not find Ready to Assign amount. Please make sure you are on the budget page.');
-            return;
+            return null;
         }
 
         // Clean up the amount string and parse it
@@ -67,137 +264,28 @@ if (!window.profitFirstInitialized) {
 
         if (isNaN(amount)) {
             console.log('Failed to parse amount');
-            alert('Could not read the Ready to Assign amount. Please refresh the page and try again.');
-            return;
-        }
-        
-        // Get settings
-        const { settings } = await chrome.storage.sync.get('settings');
-        if (!settings) {
-            alert('Please configure Profit First settings first');
-            return;
+            return null;
         }
 
-        console.log('Retrieved settings:', settings);
-
-        // Create modal
-        const modal = document.createElement('div');
-        modal.style.cssText = `
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 9999;
-            min-width: 300px;
-        `;
-
-        // Calculate amounts
-        const calculations = {
-            ownerPay: (amount * settings.percentages.ownerPay / 100).toFixed(2),
-            tax: (amount * settings.percentages.tax / 100).toFixed(2),
-            opex: (amount * settings.percentages.opex / 100).toFixed(2),
-            profit: (amount * settings.percentages.profit / 100).toFixed(2)
-        };
-
-        console.log('Calculated amounts:', calculations);
-
-        // Show calculations
-        modal.innerHTML = `
-            <h2 style="margin-top: 0;">Profit First Calculations</h2>
-            <div style="margin-bottom: 20px;">
-                <strong>Ready to Assign:</strong> $${amount.toFixed(2)}<br><br>
-                <strong>Owner's Pay:</strong> $${calculations.ownerPay}<br>
-                <strong>Tax:</strong> $${calculations.tax}<br>
-                <strong>Operating Expenses:</strong> $${calculations.opex}<br>
-                <strong>Profit:</strong> $${calculations.profit}
-            </div>
-            <button id="assign-all" style="width: 100%; padding: 10px; background: #23B2CE; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                Assign All
-            </button>
-        `;
-
-        // Add overlay
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 9998;
-        `;
-
-        // Close on overlay click
-        overlay.addEventListener('click', () => {
-            document.body.removeChild(modal);
-            document.body.removeChild(overlay);
-        });
-
-        // Handle assign all button
-        modal.querySelector('#assign-all').addEventListener('click', async () => {
-            console.log('Assigning amounts');
-            await assignAmounts(calculations, settings.categories);
-            document.body.removeChild(modal);
-            document.body.removeChild(overlay);
-        });
-
-        document.body.appendChild(overlay);
-        document.body.appendChild(modal);
+        return amount;
     }
 
-    // Assign amounts to categories
-    async function assignAmounts(amounts, categories) {
-        console.log('Starting to assign amounts:', amounts, categories);
-        
-        for (const [type, amount] of Object.entries(amounts)) {
-            const categoryId = categories[type];
-            if (!categoryId) {
-                console.log(`No category ID for ${type}, skipping`);
-                continue;
-            }
+    // Helper function to close modal
+    function closeModal() {
+        const modal = document.querySelector('.profit-first-modal-wrapper');
+        const overlay = document.querySelector('.profit-first-overlay');
+        if (modal) document.body.removeChild(modal);
+        if (overlay) document.body.removeChild(overlay);
+    }
 
-            console.log(`Assigning ${amount} to category ${categoryId}`);
-            const row = document.querySelector(`[data-entity-id="${categoryId}"]`);
-            if (!row) {
-                console.log(`Could not find row for category ${categoryId}`);
-                continue;
-            }
-
-            const input = row.querySelector('.budget-table-cell-budgeted input');
-            if (!input) {
-                console.log(`Could not find input for category ${categoryId}`);
-                continue;
-            }
-
-            try {
-                // Focus and click the input
-                input.focus();
-                input.click();
-                
-                // Set value and trigger events
-                input.value = amount;
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                input.dispatchEvent(new Event('change', { bubbles: true }));
-                input.dispatchEvent(new KeyboardEvent('keydown', {
-                    key: 'Enter',
-                    code: 'Enter',
-                    keyCode: 13,
-                    which: 13,
-                    bubbles: true
-                }));
-
-                console.log(`Successfully assigned ${amount} to ${type}`);
-                // Wait a bit before moving to next input
-                await new Promise(resolve => setTimeout(resolve, 100));
-            } catch (error) {
-                console.error(`Error assigning amount to ${type}:`, error);
-            }
-        }
+    // Helper function to format currency
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(amount);
     }
 
     // Watch for header to appear
