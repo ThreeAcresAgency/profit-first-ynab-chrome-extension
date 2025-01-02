@@ -15,7 +15,7 @@ if (!window.profitFirstInitialized) {
         container.className = 'budget-header-item budget-header-profit-first';
         
         const button = document.createElement('button');
-        button.textContent = 'Assign Profit First Money';
+        button.textContent = 'Assign Profit First Money ▼';
         button.className = 'button button-primary';
         button.style.cssText = `
             background-color: #2c396a;
