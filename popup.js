@@ -144,48 +144,47 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Save settings button click handler
     saveButton.addEventListener('click', async () => {
-        // Show loading state
-        saveButton.classList.add('saving');
-        saveButton.disabled = true;
+        const tax = parseFloat(document.getElementById('tax').value) || 0;
+        const ownerPay = parseFloat(document.getElementById('owner-pay').value) || 0;
+        const opex = parseFloat(document.getElementById('opex').value) || 0;
+        const profit = parseFloat(document.getElementById('profit').value) || 0;
+
+        const total = tax + ownerPay + opex + profit;
+        
+        if (total !== 100) {
+            showStatus(`Your percentages total ${total}%. They must add up to exactly 100%.`, 'error', false);
+            return;
+        }
+
+        const taxCategory = document.getElementById('tax-category').value;
+        const ownerPayCategory = document.getElementById('owner-pay-category').value;
+        const opexCategory = document.getElementById('opex-category').value;
+        const profitCategory = document.getElementById('profit-category').value;
+
+        if (!taxCategory || !ownerPayCategory || !opexCategory || !profitCategory) {
+            showStatus('Please select all categories', 'error', false);
+            return;
+        }
 
         const settings = {
             percentages: {
-                ownerPay: parseFloat(document.getElementById('owner-pay').value),
-                tax: parseFloat(document.getElementById('tax').value),
-                opex: parseFloat(document.getElementById('opex').value),
-                profit: parseFloat(document.getElementById('profit').value)
+                tax,
+                ownerPay,
+                opex,
+                profit
             },
             categories: {
-                ownerPay: document.getElementById('owner-pay-category').value,
-                tax: document.getElementById('tax-category').value,
-                opex: document.getElementById('opex-category').value,
-                profit: document.getElementById('profit-category').value
+                tax: taxCategory,
+                ownerPay: ownerPayCategory,
+                opex: opexCategory,
+                profit: profitCategory
             }
         };
-
-        // Validate percentages
-        const total = Object.values(settings.percentages).reduce((sum, val) => sum + val, 0);
-        if (total !== 100) {
-            showStatus('Percentages must add up to 100%', 'error', false);
-            saveButton.classList.remove('saving');
-            saveButton.disabled = false;
-            return;
-        }
-
-        // Validate categories
-        if (Object.values(settings.categories).some(val => !val)) {
-            showStatus('Please select all categories', 'error', false);
-            saveButton.classList.remove('saving');
-            saveButton.disabled = false;
-            return;
-        }
 
         try {
             const settingsKey = await getSettingsKey();
             if (!settingsKey) {
                 showStatus('Please open YNAB in another tab first', 'error', false);
-                saveButton.classList.remove('saving');
-                saveButton.disabled = false;
                 return;
             }
 
@@ -198,8 +197,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }, 1500);
         } catch (error) {
             showStatus('Failed to save settings. Please try again.', 'error', false);
-            saveButton.classList.remove('saving');
-            saveButton.disabled = false;
         }
     });
 });
