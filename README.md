@@ -1,7 +1,8 @@
 # Profit First for YNAB Chrome Extension
 
 A Chrome extension that helps calculate Profit First percentages using your YNAB budget data.
-<iframe src="https://share.zight.com/4guL97N9?embed=true&amp;title=true&amp;branding=true" width="360" height="270" style="border:none" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowtransparency="true" allowfullscreen="true"></iframe>
+
+Video explainer of how the extension works: [Profit First in YNAB](https://share.zight.com/4guL97N9)
 
 ## Testing Instructions
 
