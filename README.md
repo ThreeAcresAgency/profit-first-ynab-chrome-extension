@@ -6,27 +6,29 @@ Video explainer of how the extension works: [Profit First in YNAB](https://share
 
 ## Testing Instructions
 
-1. Get your YNAB API Token:
+1. Download the folder from GitHub:
+   - Click the green "Code" button
+   - Click "Download ZIP"
+
+2. Extract the folder:
+   - Open the downloaded zip file
+   - Extract the folder to a directory
+
+3. Get your YNAB API Token:
    - Go to https://app.ynab.com/settings
    - Scroll down to "Developer Settings"
    - Click "New Token" and copy it
 
-2. Load the extension in Chrome:
+4. Load the extension in Chrome:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" in the top right
    - Click "Load unpacked"
-   - Select this directory
+   - Select the folder you extracted
 
-3. Test the extension:
+5. Test the extension:
    - Click the extension icon in Chrome
    - Paste your YNAB API token
    - Click "Connect"
    - Try modifying percentages in Settings
    - Verify calculations update correctly
-
-## Features
-- Connects to YNAB API to get real revenue data
-- Customizable Profit First percentages
-- Persistent settings storage
-- Real-time calculation updates
 
