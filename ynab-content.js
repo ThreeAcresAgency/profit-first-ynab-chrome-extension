@@ -3,13 +3,19 @@ if (!window.profitFirstInitialized) {
     window.profitFirstInitialized = true;
     console.log('Initializing Profit First extension');
 
+    let extensionInvalidated = false;
+
     // Safe chrome.storage access - returns null if extension context is invalidated
     async function safeStorageGet(key) {
         try {
             if (!chrome?.storage?.sync) return null;
             return await chrome.storage.sync.get(key);
         } catch (e) {
-            console.warn('[Profit First] Storage unavailable:', e.message);
+            if (!extensionInvalidated) {
+                console.warn('[Profit First] Extension context invalidated, stopping.');
+                extensionInvalidated = true;
+                observer.disconnect();
+            }
             return null;
         }
     }
@@ -49,6 +55,7 @@ if (!window.profitFirstInitialized) {
 
     // Add button to header
     function addProfitFirstButton() {
+        if (extensionInvalidated) return;
         const headerFlexbox = document.querySelector('.budget-header-flexbox');
         const totalsSection = document.querySelector('.budget-header-totals');
 
@@ -87,8 +94,11 @@ if (!window.profitFirstInitialized) {
 
     // Add Copy Categories button to header (respects showCopyButton setting)
     let copyButtonPending = false;
+    let copyButtonHidden = false;
     async function addCopyCategoriesButton() {
+        if (extensionInvalidated) return;
         if (copyButtonPending) return;
+        if (copyButtonHidden) return;
 
         const headerFlexbox = document.querySelector('.budget-header-flexbox');
         const totalsSection = document.querySelector('.budget-header-totals');
@@ -100,6 +110,7 @@ if (!window.profitFirstInitialized) {
             // Check settings to see if button should be shown
             const settings = await getBudgetSettings();
             if (settings && settings.showCopyButton === false) {
+                copyButtonHidden = true;
                 // Remove existing button if it was previously rendered
                 const existing = document.querySelector('.budget-header-copy-categories');
                 if (existing) existing.remove();
@@ -388,7 +399,7 @@ if (!window.profitFirstInitialized) {
             const sinceDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
             const response = await fetch(
                 `https://api.ynab.com/v1/budgets/${budgetId}/transactions?since_date=${sinceDate}`,
-                { headers: { 'Authorization': `Bearer ${token}` } }
+                { headers: { 'Authorization': `Bearer ${token}` }, cache: 'no-store' }
             );
             if (!response.ok) {
                 console.warn('Failed to fetch transactions:', response.status);
@@ -410,6 +421,8 @@ if (!window.profitFirstInitialized) {
             });
 
             return transactions.map(tx => ({
+                id: tx.id,
+                account_id: tx.account_id,
                 memo: tx.memo || '',
                 amount: tx.amount, // milliunits
                 payee_name: tx.payee_name || '',
@@ -424,7 +437,7 @@ if (!window.profitFirstInitialized) {
     // Calculate tax deductions from inflow transactions based on tax rules
     function calculateTaxDeductions(transactions, taxRules) {
         if (!taxRules || taxRules.length === 0 || !transactions || transactions.length === 0) {
-            return { totalTaxDeducted: 0, taxBreakdown: [] };
+            return { totalTaxDeducted: 0, taxBreakdown: [], matchedTransactions: [] };
         }
 
         const breakdown = taxRules.map(rule => ({
@@ -434,14 +447,27 @@ if (!window.profitFirstInitialized) {
             amount: 0
         }));
 
+        const matchedTransactions = [];
+
         for (const tx of transactions) {
             const memo = (tx.memo || '').toLowerCase();
             for (let i = 0; i < taxRules.length; i++) {
                 const keyword = (taxRules[i].keyword || '').toLowerCase();
-                if (keyword && memo.includes(keyword)) {
+                if (!keyword) continue;
+                // Skip already-processed transactions (keyword wrapped in brackets)
+                if (memo.includes(`[${keyword}]`)) continue;
+                if (memo.includes(keyword)) {
                     // tx.amount is in milliunits and includes tax, extract tax portion
                     // e.g. $1130 with 13% HST: tax = 1130 * 13 / 113 = $130
                     breakdown[i].amount += (tx.amount * taxRules[i].rate) / (100 + taxRules[i].rate);
+                    matchedTransactions.push({
+                        id: tx.id,
+                        account_id: tx.account_id,
+                        date: tx.date,
+                        amount: tx.amount,
+                        memo: tx.memo || '',
+                        keyword: taxRules[i].keyword
+                    });
                 }
             }
         }
@@ -456,7 +482,7 @@ if (!window.profitFirstInitialized) {
 
         const totalTaxDeducted = matched.reduce((sum, b) => sum + b.amount, 0);
 
-        return { totalTaxDeducted, taxBreakdown: matched };
+        return { totalTaxDeducted, taxBreakdown: matched, matchedTransactions };
     }
 
     async function showProfitFirstModal() {
@@ -478,7 +504,7 @@ if (!window.profitFirstInitialized) {
             const tokenResult = await safeStorageGet('token');
             const token = tokenResult?.token;
             const budgetId = getBudgetId();
-            let taxResult = { totalTaxDeducted: 0, taxBreakdown: [] };
+            let taxResult = { totalTaxDeducted: 0, taxBreakdown: [], matchedTransactions: [] };
 
             if (token && budgetId && settings.taxRules && settings.taxRules.length > 0) {
                 const transactions = await fetchInflowTransactions(budgetId, token);
@@ -555,7 +581,7 @@ if (!window.profitFirstInitialized) {
                 assignments.push({ categoryId: alloc.categoryId, amount: alloc.amount });
             }
 
-            showModal(modalHTML, assignments);
+            showModal(modalHTML, assignments, taxResult.matchedTransactions, token, budgetId);
         } catch (error) {
             console.error('Error showing Profit First modal:', error);
             alert('An error occurred while showing the Profit First calculations.');
@@ -569,7 +595,7 @@ if (!window.profitFirstInitialized) {
     }
 
     // Helper function to show modal
-    function showModal(content, assignments) {
+    function showModal(content, assignments, matchedTransactions, token, budgetId) {
         const existingModal = document.querySelector('.profit-first-modal-wrapper');
         const existingOverlay = document.querySelector('.profit-first-overlay');
         if (existingModal) document.body.removeChild(existingModal);
@@ -593,6 +619,9 @@ if (!window.profitFirstInitialized) {
                     assignButton.disabled = true;
                     assignButton.textContent = 'Assigning...';
                     await assignAmounts(assignments);
+                    if (matchedTransactions && matchedTransactions.length > 0 && token && budgetId) {
+                        await markTransactionsProcessed(matchedTransactions, token, budgetId);
+                    }
                     closeModal();
                 } catch (error) {
                     console.error('Error assigning amounts:', error);
@@ -602,6 +631,70 @@ if (!window.profitFirstInitialized) {
                 }
             });
         }
+    }
+
+    // Mark matched transactions as processed by updating memo (e.g. "HST" → "[HST]")
+    async function markTransactionsProcessed(matchedTransactions, token, budgetId) {
+        // Group by transaction ID so multiple keywords on the same transaction
+        // are all applied before making a single API call
+        const grouped = new Map();
+        for (const tx of matchedTransactions) {
+            if (!grouped.has(tx.id)) {
+                grouped.set(tx.id, { ...tx, keywords: [tx.keyword] });
+            } else {
+                grouped.get(tx.id).keywords.push(tx.keyword);
+            }
+        }
+
+        for (const tx of grouped.values()) {
+            try {
+                let updatedMemo = tx.memo;
+                for (const keyword of tx.keywords) {
+                    const regex = new RegExp(`(?<!\\[)${escapeRegExp(keyword)}(?!\\])`, 'i');
+                    updatedMemo = updatedMemo.replace(regex, `[${keyword}]`);
+                }
+                if (updatedMemo === tx.memo) continue; // no change needed
+
+                const response = await fetch(
+                    `https://api.ynab.com/v1/budgets/${budgetId}/transactions/${tx.id}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            transaction: {
+                                id: tx.id,
+                                account_id: tx.account_id,
+                                date: tx.date,
+                                amount: tx.amount,
+                                memo: updatedMemo
+                            }
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    console.warn(`[Profit First] Failed to update memo for ${tx.id}: HTTP ${response.status}`);
+                } else {
+                    const body = await response.json();
+                    const savedMemo = body?.data?.transaction?.memo || '';
+                    if (savedMemo.includes('[')) {
+                        console.log(`[Profit First] Memo updated for ${tx.id}: "${tx.memo}" → "${savedMemo}"`);
+                    } else {
+                        console.warn(`[Profit First] PUT succeeded but memo not bracketed for ${tx.id}: "${savedMemo}"`);
+                    }
+                }
+            } catch (e) {
+                console.warn(`[Profit First] Error updating transaction ${tx.id}:`, e);
+            }
+        }
+    }
+
+    // Escape special regex characters in a string
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
     // Assign amounts to YNAB categories - accepts generic [{categoryId, amount}] array

@@ -222,6 +222,76 @@
             font-weight: 400;
             font-size: 13px;
         }
+
+        /* Tab bar */
+        .tab-bar {
+            display: flex;
+            border-bottom: 2px solid #e5e5e5;
+            margin-bottom: 16px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #999;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .tab-btn:hover {
+            color: #2c396a;
+        }
+        .tab-btn.active {
+            color: #2c396a;
+            border-bottom-color: #2c396a;
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* Settings tab styles */
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+        .settings-label {
+            font-size: 14px;
+            color: #333;
+        }
+        .settings-label small {
+            display: block;
+            color: #999;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .disconnect-btn {
+            padding: 6px 14px;
+            border: 1px solid #c62828;
+            background: white;
+            color: #c62828;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .disconnect-btn:hover {
+            background: #c62828;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -240,29 +310,57 @@
     <div id="settings-section" class="hidden">
         <h2>Profit First Settings</h2>
 
-        <!-- Copy Categories Toggle -->
-        <div class="toggle-row">
-            <input type="checkbox" id="show-copy-button" checked>
-            <label for="show-copy-button">Show "Copy Categories" button</label>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-btn active" data-tab="profit-first">Profit First</button>
+            <button class="tab-btn" data-tab="settings">Settings</button>
         </div>
 
-        <!-- Allocations -->
-        <div class="section-header">Allocations</div>
-        <div id="allocations-container"></div>
-        <div id="alloc-total"></div>
-        <button type="button" id="add-allocation" class="add-btn">+ Add Category</button>
+        <!-- Profit First Tab -->
+        <div id="tab-profit-first" class="tab-panel active">
+            <!-- Allocations -->
+            <div class="section-header">Allocations</div>
+            <div id="allocations-container"></div>
+            <div id="alloc-total"></div>
+            <button type="button" id="add-allocation" class="add-btn">+ Add Category</button>
 
-        <!-- Tax Rules -->
-        <div class="section-header" style="margin-top:20px;">Tax Rules</div>
-        <div id="tax-rules-container"></div>
-        <button type="button" id="add-tax-rule" class="add-btn">+ Add Tax Rule</button>
+            <!-- Tax Rules -->
+            <div class="section-header" style="margin-top:20px;">Tax Rules</div>
+            <div id="tax-rules-container"></div>
+            <button type="button" id="add-tax-rule" class="add-btn">+ Add Tax Rule</button>
 
-        <div style="margin-top:20px;">
-            <button id="save-settings" class="button">Save Settings</button>
+            <div style="margin-top:20px;">
+                <button id="save-settings" class="button">Save Settings</button>
+            </div>
         </div>
-    </div>
-    <div class="credits">
-        <small>Created By: <a target="_blank" href="https://threeacres.ca">Three Acres</a></small>
+
+        <!-- Settings Tab -->
+        <div id="tab-settings" class="tab-panel">
+            <!-- Copy Categories Toggle -->
+            <div class="settings-row">
+                <div class="toggle-row" style="margin-bottom:0;">
+                    <input type="checkbox" id="show-copy-button" checked>
+                    <label for="show-copy-button">Show "Copy Categories" button</label>
+                </div>
+            </div>
+
+            <!-- API Connection -->
+            <div class="settings-row">
+                <div class="settings-label">
+                    YNAB API
+                    <small>Connected</small>
+                </div>
+                <button id="disconnect-button" class="disconnect-btn">Disconnect</button>
+            </div>
+
+            <!-- Credits -->
+            <div class="settings-row">
+                <div class="settings-label">
+                    <small>Created by <a target="_blank" href="https://threeacres.ca">Three Acres</a></small>
+                </div>
+                <a target="_blank" href="https://github.com/bquig/Profit-First-YNAB" style="font-size:12px; color:#999;">GitHub</a>
+            </div>
+        </div>
     </div>
     <script src="popup.js"></script>
 </body>

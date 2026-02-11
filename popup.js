@@ -61,6 +61,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     const apiTokenInput = document.getElementById('api-token');
     const connectButton = document.getElementById('connect-button');
     const saveButton = document.getElementById('save-settings');
+    const disconnectButton = document.getElementById('disconnect-button');
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Disconnect handler
+    disconnectButton.addEventListener('click', async () => {
+        await chrome.storage.sync.remove('token');
+        apiTokenInput.value = '';
+        settingsSection.classList.add('hidden');
+        connectSection.classList.remove('hidden');
+        // Reset to Profit First tab for next connection
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector('.tab-btn[data-tab="profit-first"]').classList.add('active');
+        document.getElementById('tab-profit-first').classList.add('active');
+    });
 
     // Load saved token
     const { token } = await chrome.storage.sync.get('token');
