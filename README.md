@@ -6,7 +6,7 @@ A Chrome extension that applies the [Profit First](https://profitfirstbook.com/)
 
 ## Demo
 
-[![Watch the demo](https://img.youtube.com/vi/m8Gecv2H4wE/hqdefault.jpg)](https://www.youtube.com/watch?v=m8Gecv2H4wE)
+[![Watch the demo](docs/screenshot.png)](https://www.youtube.com/watch?v=m8Gecv2H4wE)
 
 ## Download & Installation
 
