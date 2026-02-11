@@ -292,3 +292,43 @@
 .button-primary:active {
     background-color: #243055 !important;
 }
+
+/* Section labels in modal */
+.profit-first-modal-wrapper .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 16px 0 6px 0;
+}
+
+/* Tax deduction rows */
+.profit-first-modal-wrapper .tax-deductions {
+    border-color: #fce4e4;
+}
+
+.profit-first-modal-wrapper .calc-row.tax-row .tax-amount {
+    color: #c62828;
+    font-weight: 600;
+}
+
+/* Post-tax amount box */
+.profit-first-modal-wrapper .post-tax-amount {
+    background: #e8f5e9;
+    padding: 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #2e7d32;
+}
+
+.profit-first-modal-wrapper .post-tax-amount .amount {
+    color: #1b5e20;
+    font-weight: 600;
+    font-size: 20px;
+    display: block;
+    margin-top: 4px;
+}
+

@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>YNAB</title>
+  <meta name="description" content="Personal home budget software built with Four Simple Rules to help you quickly gain control of your money, get out of debt, and reach your financial goals!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="ynab-version" content="25.99">
+  <meta name="robots" content="noindex">
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="VIt3rkPQM5e956jtAXLnpBpCw877sJaaA8deQpBs47MG3BFESqlkapyngypIgB-Qz9NS2O6uontgBZSrE9IRUA" />
+  <meta name="session-token" content="WzgxOTY3MzQ5LCJmNGFkNDY2NC1jMjZjLTQxOTItYjdlYy00ZTdkYTg1YzVhZjAiLCJyZW1lbWJlciIsIiQyYSQxMCRpRXZLZlZhamlJdXBVeENzVmhYTFl1Il0=--33e43e32afb38707d0d3d80cda78ff472547be99" />
+  <link rel="author" type="text/plain" href="/humans.txt" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-0c5007d15961cf91d0b100135f6b359453e23ce509c6cbe7c19940f3f6b572f7.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-28259a0cbb8268c3b9e5262838be52377170898f4ab165deb13807bff29bd4f3.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-7db7641a50068faeaaa4d8f94a58fc4b6eb13b61b2f818a2911c4d6206750983.png">
+<link rel="mask-icon" href="/assets/safari-pinned-tab-0f6609450211c5050f3e0e002911754bd2adc442d0e562a8c49df516fc0f81bc.svg" color="#71A3C3">
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-5348abbce55af32b0bdd189f51c2b2718b13e8cf0c0fe0bc8cef77472357c5b3.ico">
+<meta name="msapplication-config" content="none">
+
+  <style id="ynab-css-overrides"></style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+  :root {
+    --cdn_url_admin_close-icon_svg: url("/images/admin/close-icon.svg");
+    --cdn_url_admin_sort-icon_svg: url("/images/admin/sort-icon.svg");
+    --cdn_url_admin_ynab-logo_svg: url("/images/admin/ynab-logo.svg");
+    --cdn_url_budget-views_boxing-glove-empty-state_svg: url("/images/budget-views/boxing-glove-empty-state.svg");
+    --cdn_url_budget-views_empty-state-mug_svg: url("/images/budget-views/empty-state-mug.svg");
+    --cdn_url_category-set-wizard_aleta_webp: url("/images/category-set-wizard/aleta.webp");
+    --cdn_url_category-set-wizard_calendar_svg: url("/images/category-set-wizard/calendar.svg");
+    --cdn_url_category-set-wizard_chelsea_webp: url("/images/category-set-wizard/chelsea.webp");
+    --cdn_url_category-set-wizard_dana_webp: url("/images/category-set-wizard/dana.webp");
+    --cdn_url_category-set-wizard_flag_svg: url("/images/category-set-wizard/flag.svg");
+    --cdn_url_category-set-wizard_glove_svg: url("/images/category-set-wizard/glove.svg");
+    --cdn_url_category-set-wizard_high_five_svg: url("/images/category-set-wizard/high_five.svg");
+    --cdn_url_category-set-wizard_house_svg: url("/images/category-set-wizard/house.svg");
+    --cdn_url_category-set-wizard_jon_samie_webp: url("/images/category-set-wizard/jon_samie.webp");
+    --cdn_url_category-set-wizard_letter_blocks_svg: url("/images/category-set-wizard/letter_blocks.svg");
+    --cdn_url_category-set-wizard_liz_webp: url("/images/category-set-wizard/liz.webp");
+    --cdn_url_category-set-wizard_megaphone_svg: url("/images/category-set-wizard/megaphone.svg");
+    --cdn_url_category-set-wizard_mountain_svg: url("/images/category-set-wizard/mountain.svg");
+    --cdn_url_category-set-wizard_mug_svg: url("/images/category-set-wizard/mug.svg");
+    --cdn_url_category-set-wizard_palm_tree_svg: url("/images/category-set-wizard/palm_tree.svg");
+    --cdn_url_category-set-wizard_plant_svg: url("/images/category-set-wizard/plant.svg");
+    --cdn_url_category-set-wizard_popper_svg: url("/images/category-set-wizard/popper.svg");
+    --cdn_url_category-set-wizard_texture_svg: url("/images/category-set-wizard/texture.svg");
+    --cdn_url_category-template_compass_svg: url("/images/category-template/compass.svg");
+    --cdn_url_category-template_computer-error2_svg: url("/images/category-template/computer-error2.svg");
+    --cdn_url_category-template_modal-background_svg: url("/images/category-template/modal-background.svg");
+    --cdn_url_dashboard_blue-squiggle_svg: url("/images/dashboard/blue-squiggle.svg");
+    --cdn_url_dashboard_books_svg: url("/images/dashboard/books.svg");
+    --cdn_url_dashboard_mic_svg: url("/images/dashboard/mic.svg");
+    --cdn_url_dashboard_tv_svg: url("/images/dashboard/tv.svg");
+    --cdn_url_direct-import_apple_apple_icon_png: url("/images/direct-import/apple/apple/icon.png");
+    --cdn_url_direct-import_apple_apple_popular_png: url("/images/direct-import/apple/apple/popular.png");
+    --cdn_url_direct-import_mx_073bb78b-61a3-46d6-94f1-a7d58e048671_icon_png: url("/images/direct-import/mx/073bb78b-61a3-46d6-94f1-a7d58e048671/icon.png");
+    --cdn_url_direct-import_mx_69368_icon_png: url("/images/direct-import/mx/69368/icon.png");
+    --cdn_url_direct-import_mx_69378_icon_png: url("/images/direct-import/mx/69378/icon.png");
+    --cdn_url_direct-import_mx_69490_icon_png: url("/images/direct-import/mx/69490/icon.png");
+    --cdn_url_direct-import_mx_69666_icon_png: url("/images/direct-import/mx/69666/icon.png");
+    --cdn_url_direct-import_mx_69856_icon_png: url("/images/direct-import/mx/69856/icon.png");
+    --cdn_url_direct-import_mx_71142_icon_png: url("/images/direct-import/mx/71142/icon.png");
+    --cdn_url_direct-import_mx_76821_icon_png: url("/images/direct-import/mx/76821/icon.png");
+    --cdn_url_direct-import_mx_80426_icon_png: url("/images/direct-import/mx/80426/icon.png");
+    --cdn_url_direct-import_mx_8aa97900-6b19-989a-abdc-4d5a6721190f_icon_png: url("/images/direct-import/mx/8aa97900-6b19-989a-abdc-4d5a6721190f/icon.png");
+    --cdn_url_direct-import_mx_allybank_popular_png: url("/images/direct-import/mx/allybank/popular.png");
+    --cdn_url_direct-import_mx_amex_icon_png: url("/images/direct-import/mx/amex/icon.png");
+    --cdn_url_direct-import_mx_amex_popular_png: url("/images/direct-import/mx/amex/popular.png");
+    --cdn_url_direct-import_mx_bank_of_america_popular_png: url("/images/direct-import/mx/bank_of_america/popular.png");
+    --cdn_url_direct-import_mx_capital_one_popular_png: url("/images/direct-import/mx/capital_one/popular.png");
+    --cdn_url_direct-import_mx_chase_icon_png: url("/images/direct-import/mx/chase/icon.png");
+    --cdn_url_direct-import_mx_chase_popular_png: url("/images/direct-import/mx/chase/popular.png");
+    --cdn_url_direct-import_mx_citibank_popular_png: url("/images/direct-import/mx/citibank/popular.png");
+    --cdn_url_direct-import_mx_discover_card_popular_png: url("/images/direct-import/mx/discover_card/popular.png");
+    --cdn_url_direct-import_mx_fidelityinvestments_icon_png: url("/images/direct-import/mx/fidelityinvestments/icon.png");
+    --cdn_url_direct-import_mx_mx_bank_oauth_popular_png: url("/images/direct-import/mx/mx_bank_oauth/popular.png");
+    --cdn_url_direct-import_mx_mxbank_popular_png: url("/images/direct-import/mx/mxbank/popular.png");
+    --cdn_url_direct-import_mx_navy_fed_cu_icon_png: url("/images/direct-import/mx/navy_fed_cu/icon.png");
+    --cdn_url_direct-import_mx_us_bank_icon_png: url("/images/direct-import/mx/us_bank/icon.png");
+    --cdn_url_direct-import_mx_usaa-2_icon_png: url("/images/direct-import/mx/usaa-2/icon.png");
+    --cdn_url_direct-import_mx_wells_fargo_popular_png: url("/images/direct-import/mx/wells_fargo/popular.png");
+    --cdn_url_direct-import_plaid_ins_10_icon_png: url("/images/direct-import/plaid/ins_10/icon.png");
+    --cdn_url_direct-import_plaid_ins_10_popular_png: url("/images/direct-import/plaid/ins_10/popular.png");
+    --cdn_url_direct-import_plaid_ins_100533_icon_png: url("/images/direct-import/plaid/ins_100533/icon.png");
+    --cdn_url_direct-import_plaid_ins_100539_icon_png: url("/images/direct-import/plaid/ins_100539/icon.png");
+    --cdn_url_direct-import_plaid_ins_114754_icon_png: url("/images/direct-import/plaid/ins_114754/icon.png");
+    --cdn_url_direct-import_plaid_ins_115605_icon_png: url("/images/direct-import/plaid/ins_115605/icon.png");
+    --cdn_url_direct-import_plaid_ins_115616_icon_png: url("/images/direct-import/plaid/ins_115616/icon.png");
+    --cdn_url_direct-import_plaid_ins_115617_icon_png: url("/images/direct-import/plaid/ins_115617/icon.png");
+    --cdn_url_direct-import_plaid_ins_116243_icon_png: url("/images/direct-import/plaid/ins_116243/icon.png");
+    --cdn_url_direct-import_plaid_ins_116282_icon_png: url("/images/direct-import/plaid/ins_116282/icon.png");
+    --cdn_url_direct-import_plaid_ins_116696_icon_png: url("/images/direct-import/plaid/ins_116696/icon.png");
+    --cdn_url_direct-import_plaid_ins_117243_icon_png: url("/images/direct-import/plaid/ins_117243/icon.png");
+    --cdn_url_direct-import_plaid_ins_117243_popular_png: url("/images/direct-import/plaid/ins_117243/popular.png");
+    --cdn_url_direct-import_plaid_ins_126339_icon_png: url("/images/direct-import/plaid/ins_126339/icon.png");
+    --cdn_url_direct-import_plaid_ins_127989_icon_png: url("/images/direct-import/plaid/ins_127989/icon.png");
+    --cdn_url_direct-import_plaid_ins_127989_popular_png: url("/images/direct-import/plaid/ins_127989/popular.png");
+    --cdn_url_direct-import_plaid_ins_127991_icon_png: url("/images/direct-import/plaid/ins_127991/icon.png");
+    --cdn_url_direct-import_plaid_ins_127991_popular_png: url("/images/direct-import/plaid/ins_127991/popular.png");
+    --cdn_url_direct-import_plaid_ins_128026_icon_png: url("/images/direct-import/plaid/ins_128026/icon.png");
+    --cdn_url_direct-import_plaid_ins_128026_popular_png: url("/images/direct-import/plaid/ins_128026/popular.png");
+    --cdn_url_direct-import_plaid_ins_129473_icon_png: url("/images/direct-import/plaid/ins_129473/icon.png");
+    --cdn_url_direct-import_plaid_ins_13_icon_png: url("/images/direct-import/plaid/ins_13/icon.png");
+    --cdn_url_direct-import_plaid_ins_130888_icon_png: url("/images/direct-import/plaid/ins_130888/icon.png");
+    --cdn_url_direct-import_plaid_ins_132083_icon_png: url("/images/direct-import/plaid/ins_132083/icon.png");
+    --cdn_url_direct-import_plaid_ins_14_icon_png: url("/images/direct-import/plaid/ins_14/icon.png");
+    --cdn_url_direct-import_plaid_ins_19_icon_png: url("/images/direct-import/plaid/ins_19/icon.png");
+    --cdn_url_direct-import_plaid_ins_20_icon_png: url("/images/direct-import/plaid/ins_20/icon.png");
+    --cdn_url_direct-import_plaid_ins_22_icon_png: url("/images/direct-import/plaid/ins_22/icon.png");
+    --cdn_url_direct-import_plaid_ins_25_icon_png: url("/images/direct-import/plaid/ins_25/icon.png");
+    --cdn_url_direct-import_plaid_ins_25_popular_png: url("/images/direct-import/plaid/ins_25/popular.png");
+    --cdn_url_direct-import_plaid_ins_26_icon_png: url("/images/direct-import/plaid/ins_26/icon.png");
+    --cdn_url_direct-import_plaid_ins_28_icon_png: url("/images/direct-import/plaid/ins_28/icon.png");
+    --cdn_url_direct-import_plaid_ins_33_icon_png: url("/images/direct-import/plaid/ins_33/icon.png");
+    --cdn_url_direct-import_plaid_ins_33_popular_png: url("/images/direct-import/plaid/ins_33/popular.png");
+    --cdn_url_direct-import_plaid_ins_35_icon_png: url("/images/direct-import/plaid/ins_35/icon.png");
+    --cdn_url_direct-import_plaid_ins_38_icon_png: url("/images/direct-import/plaid/ins_38/icon.png");
+    --cdn_url_direct-import_plaid_ins_39_icon_png: url("/images/direct-import/plaid/ins_39/icon.png");
+    --cdn_url_direct-import_plaid_ins_46_icon_png: url("/images/direct-import/plaid/ins_46/icon.png");
+    --cdn_url_direct-import_plaid_ins_5_icon_png: url("/images/direct-import/plaid/ins_5/icon.png");
+    --cdn_url_direct-import_plaid_ins_5_popular_png: url("/images/direct-import/plaid/ins_5/popular.png");
+    --cdn_url_direct-import_plaid_ins_51_icon_png: url("/images/direct-import/plaid/ins_51/icon.png");
+    --cdn_url_direct-import_plaid_ins_54_icon_png: url("/images/direct-import/plaid/ins_54/icon.png");
+    --cdn_url_direct-import_plaid_ins_56_popular_png: url("/images/direct-import/plaid/ins_56/popular.png");
+    --cdn_url_direct-import_truelayer_mock_popular_png: url("/images/direct-import/truelayer/mock/popular.png");
+    --cdn_url_direct-import_truelayer_ob-aib_icon_png: url("/images/direct-import/truelayer/ob-aib/icon.png");
+    --cdn_url_direct-import_truelayer_ob-amex_icon_png: url("/images/direct-import/truelayer/ob-amex/icon.png");
+    --cdn_url_direct-import_truelayer_ob-amex_popular_png: url("/images/direct-import/truelayer/ob-amex/popular.png");
+    --cdn_url_direct-import_truelayer_ob-barclays_icon_png: url("/images/direct-import/truelayer/ob-barclays/icon.png");
+    --cdn_url_direct-import_truelayer_ob-barclays_popular_png: url("/images/direct-import/truelayer/ob-barclays/popular.png");
+    --cdn_url_direct-import_truelayer_ob-hsbc_icon_png: url("/images/direct-import/truelayer/ob-hsbc/icon.png");
+    --cdn_url_direct-import_truelayer_ob-hsbc_popular_png: url("/images/direct-import/truelayer/ob-hsbc/popular.png");
+    --cdn_url_direct-import_truelayer_ob-lloyds_icon_png: url("/images/direct-import/truelayer/ob-lloyds/icon.png");
+    --cdn_url_direct-import_truelayer_ob-lloyds_popular_png: url("/images/direct-import/truelayer/ob-lloyds/popular.png");
+    --cdn_url_direct-import_truelayer_ob-monzo_icon_png: url("/images/direct-import/truelayer/ob-monzo/icon.png");
+    --cdn_url_direct-import_truelayer_ob-monzo_popular_png: url("/images/direct-import/truelayer/ob-monzo/popular.png");
+    --cdn_url_direct-import_truelayer_ob-nationwide_icon_png: url("/images/direct-import/truelayer/ob-nationwide/icon.png");
+    --cdn_url_direct-import_truelayer_ob-nationwide_popular_png: url("/images/direct-import/truelayer/ob-nationwide/popular.png");
+    --cdn_url_direct-import_truelayer_ob-natwest_icon_png: url("/images/direct-import/truelayer/ob-natwest/icon.png");
+    --cdn_url_direct-import_truelayer_ob-natwest_popular_png: url("/images/direct-import/truelayer/ob-natwest/popular.png");
+    --cdn_url_direct-import_truelayer_ob-revolut_icon_png: url("/images/direct-import/truelayer/ob-revolut/icon.png");
+    --cdn_url_direct-import_truelayer_ob-santander_popular_png: url("/images/direct-import/truelayer/ob-santander/popular.png");
+    --cdn_url_direct-import_truelayer_ob-starling_icon_png: url("/images/direct-import/truelayer/ob-starling/icon.png");
+    --cdn_url_direct-import_truelayer_ob-starling_popular_png: url("/images/direct-import/truelayer/ob-starling/popular.png");
+    --cdn_url_direct-import_truelayer_xs2a-abn-amro_icon_png: url("/images/direct-import/truelayer/xs2a-abn-amro/icon.png");
+    --cdn_url_direct-import_truelayer_xs2a-sparkasse_icon_png: url("/images/direct-import/truelayer/xs2a-sparkasse/icon.png");
+    --cdn_url_family_banksy-set-name_svg: url("/images/family/banksy-set-name.svg");
+    --cdn_url_family_doodle-invite-mailbox_svg: url("/images/family/doodle-invite-mailbox.svg");
+    --cdn_url_family_emails_email_ytogether_a_png: url("/images/family/emails/email_ytogether_a.png");
+    --cdn_url_family_emails_email_ytogether_invite_expiring_png: url("/images/family/emails/email_ytogether_invite_expiring.png");
+    --cdn_url_family_emails_underline_scribble_png: url("/images/family/emails/underline_scribble.png");
+    --cdn_url_family_family-welcome_svg: url("/images/family/family-welcome.svg");
+    --cdn_url_family_join-header-doodle_svg: url("/images/family/join-header-doodle.svg");
+    --cdn_url_family_letter-delivery_svg: url("/images/family/letter-delivery.svg");
+    --cdn_url_family_modals_invite-sent_svg: url("/images/family/modals/invite-sent.svg");
+    --cdn_url_family_together-celebrate_svg: url("/images/family/together-celebrate.svg");
+    --cdn_url_fresh-start_svg: url("/images/fresh-start.svg");
+    --cdn_url_ftue_AssigningDollars_mp4: url("/images/ftue/AssigningDollars.mp4");
+    --cdn_url_ftue_BuildYourBudget_png: url("/images/ftue/BuildYourBudget.png");
+    --cdn_url_ftue_ConnectingAccounts_mp4: url("/images/ftue/ConnectingAccounts.mp4");
+    --cdn_url_ftue_ConnectingAccounts_png: url("/images/ftue/ConnectingAccounts.png");
+    --cdn_url_ftue_FTUEOnboardingFunMoney_svg: url("/images/ftue/FTUEOnboardingFunMoney.svg");
+    --cdn_url_ftue_FTUEOnboardingMoney_svg: url("/images/ftue/FTUEOnboardingMoney.svg");
+    --cdn_url_ftue_PiggyPainters_mp4: url("/images/ftue/PiggyPainters.mp4");
+    --cdn_url_ftue_add-target_svg: url("/images/ftue/add-target.svg");
+    --cdn_url_ftue_assigning-dollars_svg: url("/images/ftue/assigning-dollars.svg");
+    --cdn_url_ftue_background-blurple-bottom_svg: url("/images/ftue/background-blurple-bottom.svg");
+    --cdn_url_ftue_background-blurple-top-bottom_svg: url("/images/ftue/background-blurple-top-bottom.svg");
+    --cdn_url_ftue_background-meadow-bottom_svg: url("/images/ftue/background-meadow-bottom.svg");
+    --cdn_url_ftue_connecting-accounts_svg: url("/images/ftue/connecting-accounts.svg");
+    --cdn_url_ftue_heart-with-sparks_svg: url("/images/ftue/heart-with-sparks.svg");
+    --cdn_url_ftue_jars_svg: url("/images/ftue/jars.svg");
+    --cdn_url_ftue_outro_opening-quote_svg: url("/images/ftue/outro/opening-quote.svg");
+    --cdn_url_ftue_outro_spendful-outro-1_svg: url("/images/ftue/outro/spendful-outro-1.svg");
+    --cdn_url_ftue_outro_spendful-outro-2_svg: url("/images/ftue/outro/spendful-outro-2.svg");
+    --cdn_url_ftue_outro_spendful-outro-3_svg: url("/images/ftue/outro/spendful-outro-3.svg");
+    --cdn_url_ftue_outro_spendful-outro-4_svg: url("/images/ftue/outro/spendful-outro-4.svg");
+    --cdn_url_ftue_outro_spendful-outro-5_webp: url("/images/ftue/outro/spendful-outro-5.webp");
+    --cdn_url_ftue_outro_spendful-outro-6_svg: url("/images/ftue/outro/spendful-outro-6.svg");
+    --cdn_url_ftue_welcome-claritymoney_svg: url("/images/ftue/welcome-claritymoney.svg");
+    --cdn_url_ftue_welcome-debtdestroyer_svg: url("/images/ftue/welcome-debtdestroyer.svg");
+    --cdn_url_ftue_welcome-firmfoundation_svg: url("/images/ftue/welcome-firmfoundation.svg");
+    --cdn_url_ftue_welcome-happilyeverafter_svg: url("/images/ftue/welcome-happilyeverafter.svg");
+    --cdn_url_ftue_welcome-operationhomeowner_svg: url("/images/ftue/welcome-operationhomeowner.svg");
+    --cdn_url_ftue_welcome-peacefulplan_svg: url("/images/ftue/welcome-peacefulplan.svg");
+    --cdn_url_ftue_welcome-stretchmoneyfurther_svg: url("/images/ftue/welcome-stretchmoneyfurther.svg");
+    --cdn_url_ftue_welcome-supersaver_svg: url("/images/ftue/welcome-supersaver.svg");
+    --cdn_url_group_arrow_right_svg: url("/images/group/arrow_right.svg");
+    --cdn_url_group_financial_wellness_by_ynab_logo_svg: url("/images/group/financial_wellness_by_ynab_logo.svg");
+    --cdn_url_group_header_billing_svg: url("/images/group/header_billing.svg");
+    --cdn_url_group_header_books_svg: url("/images/group/header_books.svg");
+    --cdn_url_group_header_center_focus_svg: url("/images/group/header_center_focus.svg");
+    --cdn_url_group_header_chart_svg: url("/images/group/header_chart.svg");
+    --cdn_url_group_header_large_svg: url("/images/group/header_large.svg");
+    --cdn_url_group_header_mailbox_svg: url("/images/group/header_mailbox.svg");
+    --cdn_url_group_header_plant_svg: url("/images/group/header_plant.svg");
+    --cdn_url_group_header_small_svg: url("/images/group/header_small.svg");
+    --cdn_url_group_header_sparks_svg: url("/images/group/header_sparks.svg");
+    --cdn_url_group_icon_wellness_supportspecialist_2_svg: url("/images/group/icon_wellness_supportspecialist_2.svg");
+    --cdn_url_group_invite_svg: url("/images/group/invite.svg");
+    --cdn_url_group_line_burst_svg: url("/images/group/line_burst.svg");
+    --cdn_url_group_list_arrow_svg: url("/images/group/list_arrow.svg");
+    --cdn_url_group_msa_svg: url("/images/group/msa.svg");
+    --cdn_url_group_onboarding-completed_svg: url("/images/group/onboarding-completed.svg");
+    --cdn_url_group_placeholder_svg: url("/images/group/placeholder.svg");
+    --cdn_url_group_subpage_header_bg_svg: url("/images/group/subpage_header_bg.svg");
+    --cdn_url_group_wellness_billing_info_svg: url("/images/group/wellness_billing_info.svg");
+    --cdn_url_group_wellness_contact_us_svg: url("/images/group/wellness_contact_us.svg");
+    --cdn_url_group_wellness_email_svg: url("/images/group/wellness_email.svg");
+    --cdn_url_group_wellness_email_success_svg: url("/images/group/wellness_email_success.svg");
+    --cdn_url_group_wellness_email_verification_svg: url("/images/group/wellness_email_verification.svg");
+    --cdn_url_group_wellness_icon_email_svg: url("/images/group/wellness_icon_email.svg");
+    --cdn_url_group_wellness_icon_guide_svg: url("/images/group/wellness_icon_guide.svg");
+    --cdn_url_group_wellness_icon_laptop_svg: url("/images/group/wellness_icon_laptop.svg");
+    --cdn_url_group_wellness_icon_star_svg: url("/images/group/wellness_icon_star.svg");
+    --cdn_url_group_wellness_icon_support_svg: url("/images/group/wellness_icon_support.svg");
+    --cdn_url_group_wellness_icon_survey_svg: url("/images/group/wellness_icon_survey.svg");
+    --cdn_url_group_wellness_invite_svg: url("/images/group/wellness_invite.svg");
+    --cdn_url_group_wellness_member_invite_svg: url("/images/group/wellness_member_invite.svg");
+    --cdn_url_group_wellness_member_join_svg: url("/images/group/wellness_member_join.svg");
+    --cdn_url_group_wellness_pencilcheck_svg: url("/images/group/wellness_pencilcheck.svg");
+    --cdn_url_group_wellness_resources_svg: url("/images/group/wellness_resources.svg");
+    --cdn_url_group_wellness_successmgr_aubreyaldave_png: url("/images/group/wellness_successmgr_aubreyaldave.png");
+    --cdn_url_group_wellness_successmgr_aubreyaldave_small_png: url("/images/group/wellness_successmgr_aubreyaldave_small.png");
+    --cdn_url_group_wellness_successmgr_erikabickford_png: url("/images/group/wellness_successmgr_erikabickford.png");
+    --cdn_url_group_wellness_successmgr_erikabickford_small_png: url("/images/group/wellness_successmgr_erikabickford_small.png");
+    --cdn_url_group_wellness_successmgr_jilltirrell_png: url("/images/group/wellness_successmgr_jilltirrell.png");
+    --cdn_url_group_wellness_successmgr_jilltirrell_small_png: url("/images/group/wellness_successmgr_jilltirrell_small.png");
+    --cdn_url_inspector_calendar_svg: url("/images/inspector/calendar.svg");
+    --cdn_url_loan-account_get-started_svg: url("/images/loan-account/get-started.svg");
+    --cdn_url_loan-account_reconciliation-end-doodle_svg: url("/images/loan-account/reconciliation-end-doodle.svg");
+    --cdn_url_mint-import_compass_svg: url("/images/mint-import/compass.svg");
+    --cdn_url_mint-import_welcome-background_svg: url("/images/mint-import/welcome-background.svg");
+    --cdn_url_money-to-cc-payment_gif: url("/images/money-to-cc-payment.gif");
+    --cdn_url_paper-airplane_svg: url("/images/paper-airplane.svg");
+    --cdn_url_privacy-policy_lock_svg: url("/images/privacy-policy/lock.svg");
+    --cdn_url_reconcile_checkmark_svg: url("/images/reconcile/checkmark.svg");
+    --cdn_url_register_coffee-mug_svg: url("/images/register/coffee-mug.svg");
+    --cdn_url_register_party-hat-and-balloon_svg: url("/images/register/party-hat-and-balloon.svg");
+    --cdn_url_ynab-primary-logo-dark_svg: url("/images/ynab-primary-logo-dark.svg");
+    --cdn_url_ynab-primary-logo_svg: url("/images/ynab-primary-logo.svg");
+    --cdn_url_ynab-tree-logo-white_png: url("/images/ynab-tree-logo-white.png");
+    --cdn_url_ynab-tree-logo_svg: url("/images/ynab-tree-logo.svg");
+    --cdn_url_ynab4-migration-doodle_svg: url("/images/ynab4-migration-doodle.svg");
+  }
+</style>
+
+  <script type="application/json" id="ynab_client_constants">
+    {"RECURLY_PUBLIC_API_KEY":"ewr1-Otu2qg6DUSlYtrTzhKJCtU","GOOGLE_CLIENT_ID":"309954126688-fup589gaa090t59f4e40cflj17nsvmmv.apps.googleusercontent.com","HAWKER_SCRIPT_URL":"https://www.ynabassets.com/assets/ynab-hawker-v3.js","AMPLITUDE_API_KEY":"bd1e5688aa40aa62256639049e3bdd52","AMPLITUDE_WEB_SDK_SERVER_URL":"https://analytics.ynab.com/2/httpapi","AMPEX_WEB_SDK_SERVER_URL":"https://experiments.ynab.com","AMPEX_API_KEY":"client-TOg4T0GgSRPGvfzpNdFUNfJv6bKKAA05","ROLLBAR_CLIENT_TOKEN":"fc1d977c79f942cab5a2ad34080fc960","ROLLBAR_ENVIRONMENT":"ynab-api-production","ROLLBAR_ENABLED":true,"DATADOG_RUM_CLIENT_TOKEN":"pub3ca67b264fa69c1076d8b9d26c4fac68","DATADOG_RUM_APPLICATION_ID":"d1faad7d-2474-421e-a171-456fbecc18b4","DATADOG_RUM_SERVICE":"ynab-web","DATADOG_RUM_ENV":"production","CASTLE_PUBLISHABLE_KEY":"pk_WRsfqrKuhzFKnp5npHQc9hTxGzE1C8zW","CASTLE_USER_JWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjczZDU2Yzc3LWUyN2YtNDA3Zi1hMzJjLWM3NDE0ODZjMTk0MyIsImVtYWlsIjoiYnJlbmRhbnF1aWdsZXlAcHJvdG9uLm1lIiwicmVnaXN0ZXJlZF9hdCI6IjIwMTUtMTItMzBUMjI6NDY6NDNaIn0.G-2xSHN164ioLSDDbWZxCk4gJU_mRJ8XQZFbx7ddeQ0","USER_HELP_ACCESS_INITIAL_JWT":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImJyZW5kYW5xdWlnbGV5QHByb3Rvbi5tZSIsImV4dGVybmFsSWQiOiI3M2Q1NmM3Ny1lMjdmLTQwN2YtYTMyYy1jNzQxNDg2YzE5NDMiLCJpYXQiOjE3NTc0Mzk5NjJ9.Q_0Fb2uEIAiAVSJnRxM7nv6oo101XY8jlcRr-260z7A","YNAB_APP_VERSION":"25.99","PRODUCTION":true,"COOKIE_CONSENT_BANNER_SHOWN":true,"COOKIE_PRO_SCRIPT_ID":"35583f24-3c8a-43c0-a976-a317b9d5e48c","HELP_BUTTON_ENABLED":true,"IMPERSONATING":false,"CATEGORY_SET_WIZARD":{"autofill_enabled":false},"USER_COUNTRY_CODE":"CA","AUTO_SYNC_RATE":"180000","CDN_URL":"/","LOG_LEVEL":"1","NUMBER_OF_FREE_TRIAL_DAYS":34,"YNAB_SERVER_URL":"https://app.ynab.com","LOADING_MESSAGES":["Festing the Fans","Fanning the Fests","Chasing waterfalls","Finding our balance","Getting YNAB knuckle tatts","Stop. Collaborate and listen.","Spend it like you mean it","In your spendfulness era","Spendful AF (All Funded)","Spendfully yours","Spendfully ever after","A dream is a wish your farm makes","Watering the Wish Farms","Reticulating splines","I mean, it's one banana, Michael. What could it cost?","Getting your assets in gear","Loading the confetti cannon","Restocking the banana stand","Make it make cents","Checking between the couch cushions...","My money don't jiggle jiggle, it folds","Reading your fortune","Finding loose change...","Making cha-ching sounds","Loading gadgets and gizmos a-plenty","Installing whosits and whatsits galore","Counting the thingamabobs","Reprogramming the calculator","Singing Blurple Rain","Oh, the possibilities!","Let’s get that bread(maker)!","Welcome to the YNABverse","Adding my two cents","Shaking the money tree","Talk YNAB to me","Kneading the dough","Polishing the piggy banks","Bedazzling bank accounts","Doing the hokey pokey","Calling Saul...","Bonning the Iver","Bonning the Jovi","The math ain't mathing","The work is mysterious and important","Doing macrodata refinement","YNAB? Y Not","Are we there yet","Painting progress bars","Resetting the abacus","Time to smile \u0026 reconcile","Cents \u0026 Cents-ability","Loud noises!","Feeding the bucks","Admiring your shirt","Petting the categories","Bedazzling your decimals"],"REFRESH_CLIENT_PROMPT_DELAY_MAX_MINUTES":30,"BRAZE_CLIENT_API_KEY":"8cfe3b57-4652-4442-b143-e094a576d779","BRAZE_CLIENT_SDK_URL":"sdk.iad-03.braze.com","BRAZE_CLIENT_ENABLE_TESTING":false,"TOGETHER_INVITE_POLLING_SPEED":5000,"PATHS":{"LOGIN":"/users/sign_in","SIGN_UP":"/users/sign_up","NEW_SUBSCRIPTION":null,"REFERRAL_PROGRAM":"/referral_program","SUBSCRIPTION_REQUIRED":"/subscription/required","ACCOUNT_SETTINGS":"/settings","INVOICES":"/invoices","WORKSHOPS_URL":"https://www.ynab.com/free-workshops/"},"USER":{"id":"73d56c77-e27f-407f-a32c-c741486c1943","email":"brendanquigley@proton.me"},"KUSTOMER_CHAT_WEB_APP_BRAND_ID":"623b25dc7da1921899b74b4a","KUSTOMER_CHAT_WEB_API_KEY":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYWI3NjNjZmU5MjhhMzNkYTIwN2Q1NCIsInVzZXIiOiI2MmFiNzYzY2U5MjU0MzBkMWMxZjk3NDEiLCJvcmciOiI2MjNiMjVkMjk3MDAzYjNmZWZjNzQwZTEiLCJvcmdOYW1lIjoieW5hYiIsInVzZXJUeXBlIjoibWFjaGluZSIsInBvZCI6InByb2QxIiwicm9sZXMiOlsib3JnLnRyYWNraW5nIl0sImF1ZCI6InVybjpjb25zdW1lciIsImlzcyI6InVybjphcGkiLCJzdWIiOiI2MmFiNzYzY2U5MjU0MzBkMWMxZjk3NDEifQ.5nLNddil2QpvUW-of8FmhQEtKUFGtHATbxuOPTpiMGk","KUSTOMER_CHAT_WEB_API_URL":"https://cdn.kustomerapp.com/chat-web/widget.js","KUSTOMER_ENVIRONMENT":"production","FORETHOUGHT_SCRIPT_URL":"https://solve-widget.forethought.ai/embed.js","FORETHOUGHT_API_KEY":"909386fd-d0a0-4636-87ee-ae331934e0f7"}
+  </script>
+  <script src="/assets/packs/js/runtime-796f5ca3e9ae363a70db.js"></script>
+<script src="/assets/packs/js/418-6d029bc76026b00b6703.js"></script>
+<script src="/assets/packs/js/956-af106305f2764bae254f.js"></script>
+<script src="/assets/packs/js/before_ynab_web_head-9e95d5ccfa5118f697d5.js"></script>
+  <link rel="stylesheet" href="/assets/packs/css/before_ynab_web_head-c1e01f19.css" />
+  <link rel="stylesheet" href="/assets/ynab_web-34737bf6f3d43524e02aa494b88bb5ba28199ba46c408f4cd67c629dac364991.css" />
+  
+    <meta name="ynab_web/config/environment" content="%7B%22modulePrefix%22%3A%22ynab_web%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%2F%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%2C%22EXTEND_PROTOTYPES%22%3A%7B%22Date%22%3Afalse%2C%22Array%22%3Afalse%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22COVERAGE%22%3Afalse%7D%2C%22ember-rails-partials%22%3A%7B%22output%22%3A%22..%2Fynab_api%2Fapp%2Fviews%2Fcompiled_ember%2Fynab_web%22%2C%22head%22%3A%22_head.html.erb%22%2C%22body%22%3A%22_body.html.erb%22%2C%22head_test%22%3A%22_head_test.html.erb%22%2C%22body_test%22%3A%22_body_test.html.erb%22%7D%2C%22ember-backstop%22%3A%7B%22disableBackstop%22%3Afalse%7D%7D">
+
+    
+    
+
+<link integrity="" rel="stylesheet" href="/assets/ynab_web/assets/ynab-web.5656bbb2588eb695c33308917ea02074.css">
+
+    <script src="https://js.recurly.com/v4/recurly.js"></script>
+    <link href="https://js.recurly.com/v4/recurly.css" rel="stylesheet" type="text/css">
+
+    
+  
+</head>
+<body class="is-init-loading">
+  <noscript>
+    <div style="position:fixed;top:0;left:0;width:100%;height:300px;display:flex;justify-content:center;background-color:#fff;">
+      <div style="max-width:40rem;">
+        <h3>Enable JavaScript to see YNAB's standard view</h3>
+        <p>
+        The page you are viewing requires JavaScript for the best experience. Enable JavaScript
+        by changing your browser settings, and then hit refresh to try again.
+        </p>
+      </div>
+    </div>
+  </noscript>
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <div class="init-loading">
+    <div class="ynab-tree-wrap">
+      <svg class="eOVtKwigUIY1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 280 280" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+      <g transform="matrix(.39 0 0 0.39 30.452895 30.293005)"><g class="eOVtKwigUIY3_tr" transform="translate(280.388277,304.916147) rotate(-10.31)"><g class="eOVtKwigUIY3_ts" transform="scale(0.9,1)"><path d="M275.55,303.14c2.1,1.25,4.13,2.27,5.21,2.27s2.87-.7,5.18-2.27c45.54-31.33,7.65-69.77-5.18-84.26-12.85,14.49-50.76,52.93-5.21,84.26Z" transform="translate(-280.388277,-304.916147)"/></g></g><path d="M453.47,257.39h-102.75c-2.415612.144775-4.629435,1.395585-6,3.39l-61.6,101.74c-1.13,1.87-3,1.86-4.09,0L218.11,260.79c-1.363155-2.003951-3.580389-3.260384-6-3.4h-103.23c-2.19,0-3,1.48-1.76,3.3L228.83,442.33c1.317903,2.204618,2.063844,4.703691,2.17,7.27v109c0,2.209139,1.790861,4,4,4h92.3c2.209139,0,4-1.790861,4-4v-109c.117076-2.571426.880609-5.071825,2.22-7.27L455.23,260.69c1.21-1.82.42-3.3-1.76-3.3Z"/><g class="eOVtKwigUIY5_tr" transform="translate(280.744415,203.877964) rotate(-14.16)"><g class="eOVtKwigUIY5_ts" transform="scale(0.82,1)"><path d="M280.76,119.15c-12.85,14.48-50.73,52.93-5.21,84.26c2.1,1.25,4.13,2.27,5.21,2.27s2.87-.7,5.18-2.27c45.54-31.33,7.65-69.78-5.18-84.26Z" transform="translate(-280.742893,-203.877964)"/></g></g><g class="eOVtKwigUIY6_tr" transform="translate(281.90628,102.022455) rotate(-11.88)"><g class="eOVtKwigUIY6_ts" transform="scale(0.87,1)"><path d="M274.11,100.24c2.68,1.49,5.27,2.7,6.65,2.7s3.67-.83,6.63-2.7C345.57,63,297.16,17.23,280.76,0c-16.42,17.23-64.83,63-6.65,100.24Z" transform="translate(-281.489002,-102.022455)"/></g></g><g class="eOVtKwigUIY7_tr" transform="translate(342.461143,233.975726) rotate(-6.8)"><g class="eOVtKwigUIY7_ts" transform="scale(0.93,1)"><path d="M341.26,234.64c1.24.83,4.3,1.3,7.61,1.57c74.83,1.4,58.71-68.92,54.28-94.31-25.14,5.66-96.26,17.76-66.24,86.32c1.54,3.47,3.09,5.6,4.35,6.42Z" transform="translate(-342.461143,-233.975726)"/></g></g><g class="eOVtKwigUIY8_tr" transform="translate(350.120782,131.055191) rotate(-13.18)"><g class="eOVtKwigUIY8_ts" transform="scale(0.84,1)"><path d="M350.34,130.85c1.12.43,3.66.17,6.35-.3c60.16-14.66,35.81-70,28.14-90.32-19.22,10.06-74.22,35.22-39,86.17c1.78,2.6,3.38,4.02,4.51,4.45Z" transform="translate(-350.120782,-131.055191)"/></g></g><g class="eOVtKwigUIY9_tr" transform="translate(427.105964,144.49406) rotate(-6.55)"><g class="eOVtKwigUIY9_ts" transform="scale(0.96,1)"><path d="M425.82,146.08c.89.62,3.13.94,5.57,1.11c55.26.25,46.08-52.95,43.8-72.17-18.8,4.57-71.86,14.53-52.33,66.24c1,2.61,2.08,4.21,2.96,4.82Z" transform="translate(-427.105964,-144.49406)"/></g></g><g class="eOVtKwigUIY10_tr" transform="translate(436.779659,213.016057) rotate(-4.44)"><g class="eOVtKwigUIY10_ts" transform="scale(0.98,1)"><path d="M437.36,208.56c-.26,3.78.14,6.4.85,7.71s3.2,3.16,6,4.95c65.48,36.21,84.1-33.49,92.06-58-24.87-6.75-93.4-29.3-98.91,45.34Z" transform="translate(-436.779659,-213.016057)"/></g></g><g class="eOVtKwigUIY11_tr" transform="translate(477.086715,273.476642) rotate(6.5)"><g class="eOVtKwigUIY11_ts" transform="scale(0.96,1)"><path d="M477.39,269.45c-1.36,2.44-1.89,4.29-1.79,5.37s1.29,3,2.72,5c35.28,42.53,70.18,1.35,83.46-12.74-15.58-11.5-57.27-45.79-84.39,2.37Z" transform="translate(-477.086715,-273.476642)"/></g></g><g class="eOVtKwigUIY12_tr" transform="translate(431.136669,338.774075) rotate(4.44)"><g class="eOVtKwigUIY12_ts" transform="scale(0.98,1)"><path d="M434.33,332.14c-2.46,2.89-3.69,5.22-3.9,6.7s.7,4.44,1.88,7.54c31.14,68.05,87.54,23.07,108.52,8.09-15.99-20.21-57.7-79.08-106.5-22.33Z" transform="translate(-431.136669,-338.774075)"/></g></g><g class="eOVtKwigUIY13_tr" transform="translate(406.952436,379.081132) rotate(2.2)"><g class="eOVtKwigUIY13_ts" transform="scale(0.99,1)"><path d="M410.93,377.35c-2.31,0-3.86.4-4.58.91s-1.63,2.15-2.46,4c-16.12,42.66,27.65,50.89,43.17,54.66c1.88-15.87,9.47-59.76-36.13-59.57Z" transform="translate(-406.952436,-379.081132)"/></g></g><g class="eOVtKwigUIY14_tr" transform="translate(217.923569,235.173705) rotate(-1.78)"><g class="eOVtKwigUIY14_ts" transform="scale(0.99,1)"><path d="M212.9,236.21c3.31-.27,6.38-.74,7.62-1.57s2.81-2.95,4.35-6.42c30-68.56-41.1-80.66-66.24-86.32-4.43,25.39-20.55,95.71,54.27,94.31Z" transform="translate(-219.121548,-233.975726)"/></g></g><g class="eOVtKwigUIY15_tr" transform="translate(212.00623,129.575967) rotate(0)"><g class="eOVtKwigUIY15_ts" transform="scale(1,1)"><path d="M205.09,130.55c2.69.47,5.22.73,6.35.3s2.73-1.88,4.53-4.45c35.2-50.95-19.8-76.11-39-86.17-7.69,20.29-32.05,75.66,28.12,90.32Z" transform="translate(-212.00623,-129.575967)"/></g></g><g class="eOVtKwigUIY16_tr" transform="translate(141.325477,145.149693) rotate(-14.78)"><g class="eOVtKwigUIY16_ts" transform="scale(0.81,1)"><path d="M130.39,147.19c2.43-.17,4.68-.49,5.57-1.11s2-2.21,3-4.82C158.44,89.55,105.39,79.59,86.59,75c-2.28,19.24-11.46,72.44,43.8,72.19Z" transform="translate(-141.325477,-145.149693)"/></g></g><g class="eOVtKwigUIY17_tr" transform="translate(124.803036,216.240621) rotate(-15)"><g class="eOVtKwigUIY17_ts" transform="scale(0.8,1)"><path d="M117.57,221.22c2.8-1.79,5.29-3.64,6-4.95s1.11-3.93.85-7.71c-5.51-74.64-74-52.09-98.91-45.35c7.95,24.52,26.57,94.22,92.06,58.01Z" transform="translate(-124.803036,-216.240621)"/></g></g><g class="eOVtKwigUIY18_tr" transform="translate(86.108261,275.088924) rotate(-14.8)"><g class="eOVtKwigUIY18_ts" transform="scale(0.81,1)"><path d="M83.46,279.8c1.43-2,2.63-3.91,2.72-5s-.43-2.93-1.79-5.37C57.27,221.29,15.58,255.58,0,267.06c13.28,14.09,48.18,55.27,83.46,12.74Z" transform="translate(-86.108261,-275.088924)"/></g></g><g class="eOVtKwigUIY19_tr" transform="translate(132.939625,345.21216) rotate(-14.24)"><g class="eOVtKwigUIY19_ts" transform="scale(0.82,1)"><path d="M129.46,346.38c1.19-3.1,2.1-6.07,1.89-7.54s-1.45-3.81-3.9-6.7c-48.8-56.75-90.51,2.12-106.5,22.33c20.97,14.98,77.38,59.96,108.51-8.09Z" transform="translate(-132.939625,-345.21216)"/></g></g><g class="eOVtKwigUIY20_tr" transform="translate(155.4364,379.081132) rotate(-13.3)"><g class="eOVtKwigUIY20_ts" transform="scale(0.84,1)"><path d="M155.43,378.26c-.73-.51-2.27-.88-4.58-.91-45.6-.19-38,43.7-36.13,59.55c15.52-3.77,59.29-12,43.17-54.66-.83-1.83-1.73-3.48-2.46-3.98Z" transform="translate(-155.4364,-379.081132)"/></g></g></g></svg>
+    </div>
+    <h1>Loading YNAB</h1>
+    <h3>Doing macrodata refinement</h3>
+    <div class="ynab-anniversary-logo">
+      <svg viewBox="0 0 313 313" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M217.848 218.943C218.396 216.479 220.548 214.601 222.621 214.718C224.695 214.835 225.908 216.909 225.36 219.296C224.773 221.721 222.699 223.56 220.626 223.482C218.552 223.404 217.3 221.408 217.848 218.943Z" fill="black"/>
+        <path d="M138.933 200.75C138.698 203.919 138.542 205.524 138.346 209.24C135.294 208.888 133.847 208.771 131.186 208.575C131.303 204.976 131.421 203.45 131.577 200.437C129.191 196.016 126.608 191.712 124.144 187.33C126.882 187.096 128.408 186.978 131.734 186.783C133.416 189.678 134.199 190.93 135.685 193.551C137.055 191.399 138.424 188.856 139.598 186.431C143.08 186.313 144.88 186.313 148.558 186.391C145.623 191.399 142.376 196.055 138.933 200.75Z" fill="black"/>
+        <path d="M162.799 213.505C161.038 208.967 159.2 204.467 156.969 200.163C156.656 204.115 156.304 208.106 155.991 212.057C153.253 211.51 151.531 211.197 148.362 210.649C148.91 202.55 149.575 194.529 149.497 186.391C152.353 186.47 153.8 186.548 156.656 186.744C159.278 190.773 161.508 194.999 163.582 199.342C163.973 195.429 164.168 191.478 164.129 187.565C167.064 187.956 168.511 188.152 171.367 188.661C171.054 197.503 169.959 206.189 168.942 214.914C166.516 214.327 165.264 214.053 162.799 213.505Z" fill="black"/>
+        <path d="M186.822 214.014C184.005 213.466 182.596 213.153 179.779 212.488C178.958 214.288 178.527 215.148 177.706 216.987C174.615 216.283 173.089 215.892 169.998 215.148C173.911 207.01 178.019 198.951 181.54 190.617C185.061 191.321 186.783 191.673 190.304 192.26C192.73 201.611 194.373 211.04 195.86 220.587C192.456 220 190.617 219.687 187.409 219.1C187.213 217.065 187.096 216.048 186.822 214.014ZM184.944 201.102C183.927 203.372 183.379 204.506 182.322 206.776C183.809 207.089 184.553 207.245 186.039 207.558C185.648 204.937 185.452 203.646 184.944 201.102Z" fill="black"/>
+        <path d="M207.128 222.269C203.176 221.76 201.142 221.487 197.034 220.821C198.599 211.862 199.968 202.941 200.672 193.903C204.819 194.49 206.854 194.764 210.845 195.273C215.383 195.821 219.804 198.285 219.061 203.489C218.709 205.876 217.261 207.754 215.188 209.084C216.87 210.492 217.574 213.075 217.105 215.5C216.048 220.313 211.979 222.817 207.128 222.269ZM209.632 201.259C208.888 201.181 208.497 201.102 207.754 201.024C207.558 202.785 207.441 203.646 207.167 205.406C207.949 205.524 208.38 205.563 209.162 205.641C210.14 205.758 211.118 205.015 211.314 203.528C211.471 202.394 210.884 201.415 209.632 201.259ZM207.988 211.275C207.323 211.197 206.971 211.158 206.267 211.04C205.954 212.879 205.797 213.779 205.445 215.618C206.071 215.696 206.384 215.735 207.01 215.853C208.575 216.048 209.593 215.305 209.827 213.935C210.14 212.449 209.632 211.471 207.988 211.275Z" fill="black"/>
+        <path d="M149.77 155.522C149.379 158.613 149.184 160.139 148.831 163.19C146.797 162.721 145.78 162.486 143.784 161.938C144.097 158.887 144.293 157.361 144.684 154.309C143.393 149.418 142.141 144.489 140.811 139.559C142.963 140.107 144.058 140.341 146.327 140.85C147.071 143.628 147.462 145.036 148.205 147.892C149.34 145.975 150.514 143.823 151.609 141.985C153.879 142.415 155.013 142.65 157.361 143.041C154.818 147.227 152.314 151.375 149.77 155.522Z" fill="black"/>
+        <path d="M155.052 164.403C155.913 157.282 156.813 150.201 157.674 143.08C161.312 143.706 164.99 144.215 168.629 144.645C168.394 146.758 168.277 147.814 168.003 149.966C165.733 149.731 164.599 149.575 162.33 149.262C162.212 150.318 162.134 150.827 162.017 151.883C164.012 152.157 164.99 152.274 166.985 152.509C166.751 154.661 166.594 155.717 166.359 157.869C164.364 157.674 163.386 157.517 161.391 157.282C161.273 158.3 161.195 158.847 161.078 159.865C163.503 160.178 164.716 160.334 167.181 160.569C166.946 162.721 166.79 163.816 166.555 165.929C162.682 165.577 158.847 165.068 155.052 164.403Z" fill="black"/>
+        <path d="M179.545 162.956C177.471 162.877 176.454 162.838 174.419 162.721C173.832 164.208 173.558 164.912 172.972 166.36C170.663 166.242 169.489 166.164 167.181 165.929C170.155 159.082 173.089 152.196 175.945 145.271C178.332 145.428 179.545 145.467 181.97 145.623C183.379 152.744 184.709 159.826 186.118 166.946C183.731 166.829 182.557 166.751 180.171 166.633C179.897 165.186 179.779 164.442 179.545 162.956ZM177.94 153.135C177.197 155.052 176.845 156.031 176.102 157.948C177.158 157.987 177.706 158.026 178.762 158.065C178.449 156.109 178.293 155.091 177.94 153.135Z" fill="black"/>
+        <path d="M195.038 167.533C194.177 164.677 193.747 163.19 192.886 160.217C192.612 163.112 192.456 164.521 192.182 167.338C190.069 167.181 189.013 167.142 186.861 167.025C187.565 160.021 188.269 153.018 188.974 145.975C191.478 146.093 192.73 146.132 195.273 146.288C199.89 146.523 201.885 149.418 201.494 153.448C201.259 155.952 200.203 157.987 198.285 159.16C199.381 162.721 199.929 164.521 200.985 167.964C198.598 167.807 197.425 167.729 195.038 167.533ZM194.725 151.14C194.334 151.101 194.177 151.101 193.786 151.101C193.59 152.9 193.512 153.8 193.356 155.6C193.669 155.6 193.825 155.639 194.138 155.639C195.273 155.717 196.016 154.583 196.134 153.331C196.251 152.274 195.821 151.179 194.725 151.14Z" fill="black"/>
+        <path d="M208.028 168.981C205.406 168.746 203.02 167.768 201.298 166.712C202.081 164.599 202.472 163.503 203.293 161.312C204.858 162.33 206.971 163.308 208.028 163.425C208.81 163.503 209.24 163.073 209.319 162.447C209.358 162.095 209.201 161.625 208.575 161.312C207.754 160.882 207.323 160.686 206.502 160.256C203.88 158.926 202.707 157.048 203.02 153.683C203.489 148.91 206.345 146.484 209.788 146.758C211.862 146.914 213.818 147.619 215.579 148.714C214.874 150.749 214.522 151.805 213.818 153.879C212.175 153.057 210.884 152.47 209.71 152.392C209.084 152.353 208.654 152.783 208.614 153.253C208.575 153.683 208.732 154.113 209.397 154.426C210.179 154.778 210.571 154.935 211.353 155.287C214.405 156.696 215.187 159.239 214.914 162.173C214.483 166.32 212.292 169.372 208.028 168.981Z" fill="black"/>
+        <path d="M219.374 160.686C219.413 159.826 219.883 159.121 220.548 158.73C221.017 158.417 221.604 158.3 222.191 158.339C223.482 158.417 224.382 159.395 224.304 160.647C224.264 161.469 223.873 162.134 223.247 162.564C222.739 162.877 222.152 163.073 221.526 163.034C220.156 162.917 219.296 161.978 219.374 160.686ZM221.604 161.938C221.956 161.978 222.269 161.86 222.504 161.665C222.817 161.43 223.012 161.039 223.052 160.608C223.091 159.904 222.66 159.395 221.995 159.356C221.643 159.317 221.33 159.434 221.095 159.63C220.782 159.865 220.587 160.256 220.548 160.686C220.548 161.391 220.978 161.899 221.604 161.938Z" fill="black"/>
+        <path d="M223.756 164.56C223.56 164.403 223.521 164.247 223.717 164.051L223.873 163.856C224.03 163.66 224.186 163.582 224.343 163.699C224.421 163.777 224.538 163.816 224.617 163.816C224.93 163.856 225.164 163.582 225.282 163.151L226.142 159.552L225.712 159.513C225.477 159.513 225.399 159.356 225.438 159.161L225.517 158.926C225.595 158.73 225.751 158.613 225.947 158.613L226.377 158.652L226.416 158.456C226.573 157.83 226.886 157.361 227.316 157.126C227.707 156.891 228.138 156.813 228.568 156.852C228.881 156.891 229.233 156.93 229.429 157.087C229.586 157.204 229.664 157.322 229.507 157.517L229.312 157.791C229.155 157.987 229.038 158.026 228.842 157.948C228.725 157.909 228.607 157.83 228.451 157.83C228.294 157.83 228.099 157.869 227.942 157.987C227.786 158.104 227.668 158.3 227.629 158.574L227.59 158.769L228.451 158.808C228.647 158.808 228.764 158.965 228.725 159.161L228.647 159.395C228.568 159.63 228.451 159.747 228.216 159.708L227.355 159.669L226.495 163.308C226.221 164.403 225.399 164.873 224.577 164.834C224.225 164.795 223.912 164.677 223.756 164.56Z" fill="black"/>
+        <path d="M220.508 182.714C223.169 183.261 225.282 183.927 226.534 184.709C227.355 185.218 228.333 185.492 229.312 185.492C230.446 185.492 232.637 185.061 234.398 182.322C236.198 179.466 237.567 174.184 238.467 169.763C244.883 168.981 250.243 167.416 254.86 163.582C256.503 162.212 258.499 159.16 261.785 146.406C263.585 139.441 264.994 132.477 265.267 131.147C265.62 129.347 264.876 127.508 263.311 126.491C262.568 126.022 261.707 125.748 260.846 125.748C259.946 125.748 259.047 126.022 258.303 126.53C258.186 126.608 248.6 132.947 233.772 134.394C233.263 115.653 229.116 101.608 221.408 92.648C212.996 82.8276 200.946 77.8196 185.531 77.8196C170.272 77.8196 158.182 82.7885 149.692 92.6088C144.215 98.9471 140.498 107.789 138.581 118.94C136.272 113.58 132.634 109.08 127.743 105.481C119.214 99.2601 108.259 96.091 95.2694 96.091C95.0737 96.091 94.839 96.091 94.6434 96.091C85.7229 96.1692 77.624 97.6951 70.6206 100.59C63.4607 103.603 57.7876 107.672 53.7969 112.68C49.6105 117.923 47.5369 123.752 47.576 130.012C47.6151 136.585 49.7279 141.906 53.7969 145.819C57.8267 149.692 62.6391 151.688 68.1949 151.688H68.3905C73.6332 151.648 78.2891 149.966 82.319 146.68C86.5445 143.197 88.7746 138.502 88.7355 133.103C88.6964 129.347 87.4835 125.748 85.0969 122.461C84.1579 121.131 83.0624 119.996 81.8495 119.018C84.0014 117.727 86.5445 117.062 89.518 117.023H89.6745C93.4305 117.023 96.3257 118.118 98.5167 120.388C100.747 122.735 101.921 126.569 101.96 131.812C101.999 136.429 101.099 140.811 99.2601 144.802C97.3039 149.027 94.839 152.94 91.9046 156.422C88.8137 160.139 84.51 164.794 79.0716 170.272C73.3985 176.023 68.7817 181.07 65.3387 185.179C61.8175 189.443 58.4919 194.334 55.4401 199.811C52.3101 205.445 50.1191 211.666 48.9454 218.239C48.6324 219.882 49.2975 221.565 50.6277 222.582L55.1271 226.064C55.9487 227.121 57.2399 227.786 58.6875 227.786C59.1179 227.786 59.5874 227.707 60.0177 227.59C79.8541 221.526 96.9517 218.709 113.854 218.709C134.199 218.709 152.744 222.895 174.184 227.707C178.566 228.686 183.496 229.82 188.582 230.916C197.503 232.833 213.349 234.906 222.699 234.906C223.717 234.906 224.656 234.867 225.477 234.828C232.872 234.359 239.993 233.694 245.861 230.407C248.013 229.194 250.791 226.338 256.66 207.48C259.712 197.62 262.333 187.565 262.803 185.648C263.272 183.848 262.529 181.931 261.003 180.836C260.259 180.288 259.36 180.014 258.421 180.014C257.521 180.014 256.621 180.288 255.917 180.797C255.799 180.875 243.553 188.935 225.282 188.935C222.034 188.935 218.748 188.661 215.5 188.191C215.148 188.152 214.757 188.074 214.405 187.996C216.674 186.548 218.709 184.748 220.508 182.714ZM233.811 136.781C250.009 135.294 260.377 128.291 260.494 128.213C260.69 128.095 260.964 128.056 261.159 128.213C261.355 128.33 261.472 128.565 261.394 128.799C261.159 130.012 260.064 135.412 258.616 141.359C257.442 142.219 252.317 145.936 247.192 147.971C246.722 148.166 246.879 148.871 247.387 148.792C250.478 148.44 254.43 147.853 257.169 146.875C255.604 152.587 253.843 157.752 252.356 158.965C248.796 161.938 244.531 163.308 239.445 164.051C239.562 163.269 239.641 162.682 239.68 162.447C241.597 147.736 239.367 144.136 236.902 142.532C236.002 141.945 234.985 141.437 233.772 141.006C233.772 140.185 233.811 139.324 233.811 138.502C233.811 137.955 233.811 137.368 233.811 136.781ZM141.593 121.053C141.75 120.935 141.906 120.857 142.063 120.779C142.18 119.762 142.376 118.627 142.571 117.297C144.371 107.242 147.736 99.2992 152.627 93.6652C160.373 84.7447 171.446 80.2062 185.531 80.2062C199.733 80.2062 210.805 84.7447 218.435 93.6652C226.025 102.547 229.898 117.14 229.898 136.977C229.898 137.955 229.898 138.972 229.859 139.95C223.404 138.502 213.935 137.916 201.337 137.368C201.337 137.133 201.337 136.937 201.337 136.703C201.337 124.339 200.633 114.793 199.224 108.298C197.816 101.881 195.977 97.4995 193.747 95.3476C191.517 93.2348 188.778 92.1393 185.57 92.1393C182.362 92.1393 179.584 93.2348 177.314 95.3476C175.006 97.4995 173.128 101.921 171.68 108.454C170.272 114.754 169.568 123.831 169.489 135.412C162.603 134.668 156.304 133.612 151.335 132.047C146.132 130.404 144.332 128.76 143.354 127.547C142.102 126.061 141.828 124.574 141.985 122.305C140.615 123.361 139.911 124.77 140.067 126.295C140.38 129.582 144.136 132.712 150.162 134.59C162.251 138.424 181.266 139.246 198.051 139.95C214.992 140.693 229.664 141.319 234.828 144.723C237.41 146.406 236.393 156.578 235.845 160.843C234.985 167.416 233.146 175.945 231.15 179.075C230.485 180.131 229.859 180.405 229.351 180.405C229.077 180.405 228.842 180.288 228.646 180.21C222.543 176.415 204.272 175.515 186.626 174.654C169.098 173.793 150.944 172.893 142.258 169.294C136.272 166.79 133.025 163.934 132.008 160.295C130.756 155.835 127.43 130.051 141.593 121.053ZM185.179 128.721C189.365 129.778 193.434 130.834 197.346 131.773C197.386 133.494 197.425 135.294 197.425 137.133C189.561 136.781 181.188 136.429 173.402 135.725C173.441 133.729 173.48 131.812 173.519 129.973C173.519 129.934 173.519 129.856 173.519 129.817C173.519 129.308 173.558 128.799 173.558 128.291C173.558 128.134 173.558 128.017 173.558 127.86C173.558 127.469 173.598 127.039 173.598 126.648C173.598 126.452 173.598 126.295 173.637 126.1C173.637 125.982 173.637 125.904 173.637 125.787C177.197 126.726 181.031 127.665 185.179 128.721ZM173.832 123.4C174.184 118.353 174.732 114.167 175.476 110.802C177.158 103.251 178.997 100.629 179.975 99.7296C181.54 98.282 183.34 97.5777 185.531 97.5777C187.722 97.5777 189.482 98.282 191.008 99.6905C191.947 100.59 193.786 103.212 195.39 110.645C196.407 115.262 197.033 121.522 197.268 129.347C193.708 128.447 189.952 127.508 186.157 126.53C181.618 125.356 177.51 124.339 173.832 123.4ZM147.658 179.427C129.191 179.584 115.536 181.11 105.011 183.301C112.289 178.645 118.275 174.497 122.813 170.859C125.083 169.059 127.195 167.064 129.191 164.912C131.069 168.629 134.825 171.563 140.733 174.028C142.024 174.576 143.51 175.045 145.115 175.476C145.936 176.884 146.758 178.175 147.658 179.427ZM214.953 190.617C240.306 194.569 257.951 182.753 258.147 182.635C258.342 182.479 258.616 182.518 258.812 182.635C259.007 182.792 259.086 183.027 259.047 183.261C258.734 184.474 257.716 188.426 256.308 193.434C254.234 194.882 250.126 197.62 246.018 199.264C245.548 199.459 245.705 200.163 246.214 200.085C248.913 199.772 252.239 199.303 254.86 198.52C253.921 201.807 252.865 205.25 251.769 208.575C249.774 209.984 245.548 212.84 241.323 214.483C240.853 214.679 241.01 215.383 241.519 215.305C244.14 214.992 247.387 214.522 249.97 213.818C247.818 219.843 245.627 224.577 243.944 225.516C238.819 228.412 232.168 229.038 225.243 229.468C224.46 229.507 223.599 229.546 222.699 229.546C213.935 229.546 198.52 227.59 189.443 225.634C184.474 224.538 179.701 223.482 175.084 222.426C136.233 213.662 108.181 207.323 58.9222 222.347C58.6092 222.426 58.2962 222.269 58.1789 221.956V221.917L53.0535 218.004C52.897 217.887 52.7796 217.652 52.8187 217.457C53.9142 211.275 55.9487 205.484 58.8831 200.242C61.7784 194.999 64.9866 190.265 68.3514 186.235C71.7161 182.205 76.2546 177.236 81.8886 171.563C87.3661 166.007 91.7481 161.273 94.9172 157.478C98.0864 153.722 100.708 149.497 102.82 144.958C104.894 140.459 105.911 135.529 105.872 130.325C105.833 124.065 104.307 119.292 101.334 116.24C98.3994 113.189 94.4869 111.663 89.6745 111.663C89.5962 111.663 89.5571 111.663 89.4789 111.663C83.4145 111.702 78.6412 113.971 75.1982 118.353C77.8979 119.253 80.128 120.896 81.8886 123.283C83.7666 125.904 84.7447 128.721 84.7839 131.695C84.823 135.959 83.1406 139.481 79.815 142.219C76.5285 144.919 72.6551 146.327 68.3514 146.367C68.3122 146.367 68.234 146.367 68.1949 146.367C63.6955 146.367 59.7439 144.762 56.4965 141.632C53.21 138.424 51.4885 134.042 51.4494 128.604C51.4102 123.283 53.21 118.275 56.8095 113.736C60.409 109.237 65.5344 105.559 72.1074 102.82C78.6412 100.082 86.2315 98.6732 94.6434 98.595C94.839 98.595 95.0346 98.595 95.2302 98.595C107.398 98.595 117.531 101.49 125.396 107.242C130.521 110.958 134.042 115.849 135.959 121.796C125.435 131.969 126.256 151.101 127.547 159.395C125.356 161.938 122.97 164.286 120.348 166.359C115.536 170.194 109.002 174.693 101.021 179.701C96.3649 182.714 92.4524 185.492 89.0094 187.956C87.2487 189.208 85.6055 190.382 84.1187 191.399C82.2407 192.691 80.4801 193.982 78.876 195.273C90.2614 189.208 107.242 182.166 148.518 181.892C166.633 181.775 183.653 184.983 198.677 187.839C204.389 188.778 209.749 189.795 214.953 190.617ZM207.01 186.822C204.545 186.352 202.041 185.883 199.42 185.413C185.687 182.792 170.233 179.897 153.722 179.466C152.94 178.645 152.235 177.784 151.531 176.845C161.273 178.488 173.989 179.114 186.431 179.701C195.781 180.171 206.502 180.679 214.718 181.736C212.41 183.77 209.827 185.452 207.01 186.822Z" fill="black"/>
+      </svg>
+    </div>
+  </div>
+
+  
+    
+
+    
+<script src="/assets/ynab_web/assets/vendor.72448479e003f6ac6205ca82e0dea90f.js"></script>
+
+    
+<script src="/assets/ynab_web/assets/chunk.09efaed5827e052afbaa.js"></script>
+<script src="/assets/ynab_web/assets/chunk.2297c3c4f90f602a82ab.js"></script>
+
+
+    
+  
+
+
+</body>
+</html>
