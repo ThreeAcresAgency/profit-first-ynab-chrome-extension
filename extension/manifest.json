@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Profit First for YNAB",
+  "version": "1.0",
+  "description": "Apply Profit First methodology to your YNAB budget",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://api.ynab.com/*",
+    "https://app.ynab.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://app.ynab.com/*"],
+      "css": ["ynab-content.css"],
+      "js": ["ynab-content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

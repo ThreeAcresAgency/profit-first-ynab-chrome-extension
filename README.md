@@ -2,25 +2,26 @@
 
 A Chrome extension that applies the [Profit First](https://profitfirstbook.com/) methodology to your YNAB budget. It adds an "Assign Profit First Money" button directly into the YNAB interface that automatically splits your "Ready to Assign" amount into your configured allocation categories.
 
-![Assign Profit First Money Button](AssignProfitFirstMoneyButton.png)
+![Assign Profit First Money Button](docs/screenshot.png)
 
-Video explainer of how the extension works: [Profit First in YNAB](https://share.zight.com/4guL97N9)
+## Demo
 
-## Installation
+https://github.com/ThreeAcresAgency/profit-first-ynab-chrome-extension/raw/main/docs/demo.mp4
+
+## Download & Installation
 
 ### 1. Download the Extension
 
-- Go to the [GitHub repository](https://github.com/ThreeAcresAgency/profit-first-ynab-chrome-extension)
-- Click the green **Code** button
-- Click **Download ZIP**
-- Extract the ZIP file to a folder on your computer
+[**Download ZIP**](https://github.com/ThreeAcresAgency/profit-first-ynab-chrome-extension/archive/refs/heads/main.zip)
+
+After downloading, extract the ZIP file to a folder on your computer.
 
 ### 2. Load the Extension in Chrome
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable **Developer mode** using the toggle in the top-right corner
 3. Click **Load unpacked**
-4. Select the extracted folder
+4. Select the `extension/` folder inside the extracted folder
 5. The extension icon should now appear in your Chrome toolbar
 
 ### 3. Get Your YNAB API Token
