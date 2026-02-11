@@ -6,7 +6,7 @@ A Chrome extension that applies the [Profit First](https://profitfirstbook.com/)
 
 ## Demo
 
-https://github.com/ThreeAcresAgency/profit-first-ynab-chrome-extension/raw/main/docs/demo.mp4
+<video src="https://github.com/ThreeAcresAgency/profit-first-ynab-chrome-extension/raw/main/docs/demo.mp4" controls width="100%"></video>
 
 ## Download & Installation
 
