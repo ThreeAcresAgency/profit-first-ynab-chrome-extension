@@ -426,7 +426,13 @@ if (!window.profitFirstInitialized) {
                 memo: tx.memo || '',
                 amount: tx.amount, // milliunits
                 payee_name: tx.payee_name || '',
-                date: tx.date
+                date: tx.date,
+                // Split transactions carry their real memos on each leg, not the
+                // parent. Keep the (non-deleted, non-transfer) legs so tax rules
+                // can match a keyword that only appears on a subtransaction.
+                subtransactions: (tx.subtransactions || [])
+                    .filter(st => !st.deleted && !st.transfer_account_id)
+                    .map(st => ({ memo: st.memo || '', amount: st.amount }))
             }));
         } catch (e) {
             console.warn('Failed to fetch inflow transactions:', e);
@@ -450,16 +456,35 @@ if (!window.profitFirstInitialized) {
         const matchedTransactions = [];
 
         for (const tx of transactions) {
-            const memo = (tx.memo || '').toLowerCase();
+            const parentMemo = (tx.memo || '').toLowerCase();
+            // For a split, match each subtransaction's own memo and use that
+            // leg's amount as the tax base. For a normal transaction, the parent
+            // memo/amount is the single "leg". The processed-marker always lives
+            // on the parent memo (YNAB's API can't update subtransactions), so
+            // that is where we check for the already-processed [keyword] bracket.
+            const legs = (tx.subtransactions && tx.subtransactions.length > 0)
+                ? tx.subtransactions.map(st => ({ memo: (st.memo || '').toLowerCase(), amount: st.amount }))
+                : [{ memo: parentMemo, amount: tx.amount }];
+
             for (let i = 0; i < taxRules.length; i++) {
                 const keyword = (taxRules[i].keyword || '').toLowerCase();
                 if (!keyword) continue;
-                // Skip already-processed transactions (keyword wrapped in brackets)
-                if (memo.includes(`[${keyword}]`)) continue;
-                if (memo.includes(keyword)) {
-                    // tx.amount is in milliunits and includes tax, extract tax portion
+                // Skip already-processed transactions (marker on the parent memo)
+                if (parentMemo.includes(`[${keyword}]`)) continue;
+
+                // Sum the amounts of every leg whose memo contains the keyword.
+                let matchedAmount = 0;
+                for (const leg of legs) {
+                    if (leg.memo.includes(`[${keyword}]`)) continue; // defensive
+                    if (leg.memo.includes(keyword)) {
+                        matchedAmount += leg.amount;
+                    }
+                }
+
+                if (matchedAmount > 0) {
+                    // Amount is in milliunits and includes tax, extract tax portion
                     // e.g. $1130 with 13% HST: tax = 1130 * 13 / 113 = $130
-                    breakdown[i].amount += (tx.amount * taxRules[i].rate) / (100 + taxRules[i].rate);
+                    breakdown[i].amount += (matchedAmount * taxRules[i].rate) / (100 + taxRules[i].rate);
                     matchedTransactions.push({
                         id: tx.id,
                         account_id: tx.account_id,
@@ -648,12 +673,22 @@ if (!window.profitFirstInitialized) {
 
         for (const tx of grouped.values()) {
             try {
-                let updatedMemo = tx.memo;
+                let updatedMemo = tx.memo || '';
                 for (const keyword of tx.keywords) {
+                    // Already marked on the parent memo? Nothing to do.
+                    if (new RegExp(`\\[${escapeRegExp(keyword)}\\]`, 'i').test(updatedMemo)) continue;
                     const regex = new RegExp(`(?<!\\[)${escapeRegExp(keyword)}(?!\\])`, 'i');
-                    updatedMemo = updatedMemo.replace(regex, `[${keyword}]`);
+                    if (regex.test(updatedMemo)) {
+                        // Keyword is in the parent memo (normal txn): bracket it in place.
+                        updatedMemo = updatedMemo.replace(regex, `[${keyword}]`);
+                    } else {
+                        // Keyword only appears on a split leg, which the API can't
+                        // update. Append the marker to the parent memo so this split
+                        // isn't taxed again on the next run.
+                        updatedMemo = updatedMemo ? `${updatedMemo} [${keyword}]` : `[${keyword}]`;
+                    }
                 }
-                if (updatedMemo === tx.memo) continue; // no change needed
+                if (updatedMemo === (tx.memo || '')) continue; // no change needed
 
                 const response = await fetch(
                     `https://api.ynab.com/v1/budgets/${budgetId}/transactions/${tx.id}`,

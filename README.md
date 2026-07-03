@@ -41,6 +41,21 @@ After downloading, extract the ZIP file to a folder on your computer.
 5. Your percentages must add up to exactly **100%**
 6. Click **Save Settings**
 
+## Updating the Extension
+
+When a new version is released, update your local copy and reload it in Chrome:
+
+1. Get the latest code:
+   - **If you downloaded the ZIP:** [download it again](https://github.com/ThreeAcresAgency/profit-first-ynab-chrome-extension/archive/refs/heads/main.zip), extract it, and replace your old folder with the new one.
+   - **If you cloned the repo with git:** run `git pull` in the project folder.
+2. Open Chrome and go to `chrome://extensions/`
+3. Find **Profit First for YNAB** and click the **reload** (↻) icon on its card
+4. Reload any open YNAB tab (`app.ynab.com`) so the updated content script takes effect
+
+You can confirm the update loaded by checking the version number shown on the extension's card in `chrome://extensions/`.
+
+> **Note:** This is an unpacked extension, so Chrome does **not** update it automatically. You need to reload it manually after each update.
+
 ## How It Works
 
 ### Allocations
@@ -71,6 +86,7 @@ Tax rules let you automatically calculate and set aside sales tax (e.g., HST, GS
 
 - You configure each tax rule with a **keyword**, a **tax rate**, and a **YNAB category**
 - The extension looks at all **inflow transactions in the current month** and checks each transaction's memo for your keyword
+- **Split transactions are supported:** each split (subtransaction) has its own memo, so the extension checks every split's memo individually and uses that split's amount as the tax base. If only one leg of a split has "HST" in its memo, only that leg's amount is taxed
 - When a match is found, it calculates the tax portion from the tax-inclusive amount. For example, if you received $1,130 and your HST rate is 13%, the tax portion is $1,130 x 13 / 113 = **$130**
 - The total tax across all matching transactions is deducted from your Ready to Assign amount before the Profit First percentages are applied
 - The tax amount is assigned to the YNAB category you specified in the rule
