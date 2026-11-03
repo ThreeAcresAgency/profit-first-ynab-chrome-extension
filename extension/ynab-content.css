@@ -169,7 +169,9 @@
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    min-width: 400px;
+    min-width: min(448px, calc(100vw - 32px)); /* 400px content + 24px padding each side */
+    max-width: min(480px, calc(100vw - 32px));
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     padding: 24px;
 }
@@ -291,6 +293,15 @@
 
 .button-primary:active {
     background-color: #243055 !important;
+}
+
+/* Small note under the income amount */
+.profit-first-modal-wrapper .base-note {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    line-height: 1.4;
+    margin: -12px 0 16px 0;
 }
 
 /* Section labels in modal */

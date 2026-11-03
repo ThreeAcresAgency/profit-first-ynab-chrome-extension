@@ -19,7 +19,7 @@
     {
       "matches": ["https://app.ynab.com/*"],
       "css": ["ynab-content.css"],
-      "js": ["ynab-content.js"],
+      "js": ["month-range.js", "month-income.js", "ynab-content.js"],
       "run_at": "document_end"
     }
   ],
