@@ -427,7 +427,6 @@ if (!window.profitFirstInitialized) {
                 account_id: tx.account_id,
                 memo: tx.memo || '',
                 amount: tx.amount, // milliunits
-                category_name: tx.category_name || '',
                 payee_name: tx.payee_name || '',
                 date: tx.date,
                 // Split transactions carry their real memos on each leg, not the
@@ -435,7 +434,7 @@ if (!window.profitFirstInitialized) {
                 // can match a keyword that only appears on a subtransaction.
                 subtransactions: (tx.subtransactions || [])
                     .filter(st => !st.deleted && !st.transfer_account_id)
-                    .map(st => ({ memo: st.memo || '', amount: st.amount, category_name: st.category_name || '' }))
+                    .map(st => ({ memo: st.memo || '', amount: st.amount }))
             }));
         } catch (e) {
             console.warn('Failed to fetch inflow transactions:', e);
@@ -534,31 +533,15 @@ if (!window.profitFirstInitialized) {
             const budgetId = getBudgetId();
             let taxResult = { totalTaxDeducted: 0, taxBreakdown: [], matchedTransactions: [] };
 
-            // Each month is divided up from its own income (inflows to Ready to
-            // Assign in the month open in YNAB), not the whole Ready to Assign
-            // balance, which also holds other months' money. Without an API
-            // token we can't see transactions, so fall back to the balance.
-            let baseAmount = readyToAssign;
-            let baseLabel = 'Ready to Assign';
-            let cappedToReadyToAssign = false;
-
-            if (token && budgetId) {
+            // Divide up whatever is in Ready to Assign (new income, money
+            // released from categories, anything). Transactions are only used
+            // to find tax to set aside; with none this month, there's no tax.
+            if (token && budgetId && settings.taxRules && settings.taxRules.length > 0) {
                 const transactions = await fetchInflowTransactions(budgetId, token);
-                const { sinceDate } = getSelectedMonthRange(window.location.href);
-                const [y, m] = sinceDate.split('-').map(Number);
-                const monthName = new Date(y, m - 1, 1).toLocaleString('en-CA', { month: 'long', year: 'numeric' });
-                const monthIncome = sumReadyToAssignIncome(transactions) / 1000; // dollars
-                baseLabel = `${monthName} Income`;
-                // Never assign more than is actually sitting in Ready to Assign.
-                cappedToReadyToAssign = monthIncome > readyToAssign;
-                baseAmount = Math.min(monthIncome, readyToAssign);
-
-                if (settings.taxRules && settings.taxRules.length > 0) {
-                    taxResult = calculateTaxDeductions(transactions, settings.taxRules);
-                }
+                taxResult = calculateTaxDeductions(transactions, settings.taxRules);
             }
 
-            const postTaxAmount = baseAmount - taxResult.totalTaxDeducted;
+            const postTaxAmount = readyToAssign - taxResult.totalTaxDeducted;
 
             // Calculate allocation amounts from post-tax amount
             const allocationAmounts = settings.allocations.map(alloc => ({
@@ -572,13 +555,10 @@ if (!window.profitFirstInitialized) {
             let modalHTML = `
                 <h2>Profit First Calculations</h2>
                 <div class="ready-to-assign">
-                    ${escapeHtml(baseLabel)}
-                    <span class="amount">${formatCurrency(baseAmount)}</span>
+                    Ready to Assign
+                    <span class="amount">${formatCurrency(readyToAssign)}</span>
                 </div>
             `;
-            if (baseLabel !== 'Ready to Assign') {
-                modalHTML += `<div class="base-note">Ready to Assign balance: ${formatCurrency(readyToAssign)}${cappedToReadyToAssign ? '<br>Income is more than this, so only the balance is used.' : ''}</div>`;
-            }
 
             // Tax deductions section (only if there are matches)
             if (taxResult.taxBreakdown.length > 0) {

@@ -295,15 +295,6 @@
     background-color: #243055 !important;
 }
 
-/* Small note under the income amount */
-.profit-first-modal-wrapper .base-note {
-    font-size: 12px;
-    color: #888;
-    text-align: center;
-    line-height: 1.4;
-    margin: -12px 0 16px 0;
-}
-
 /* Section labels in modal */
 .profit-first-modal-wrapper .section-label {
     font-size: 12px;
