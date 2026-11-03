@@ -5,6 +5,20 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- Tax rules now look at inflows in the **month open in YNAB** (from the
+  budget URL) instead of always using today's month.
+
+### Fixed
+- The calculations modal no longer overflows narrow windows.
+- The full **Ready to Assign** balance is divided up again. A short-lived
+  change split only the selected month's income, which meant money
+  released from a category back into Ready to Assign could never be
+  divided up. Transactions are only used to find tax, so a month with no
+  transactions still works, just without tax.
+
 ## [1.1] - 2026-07-03
 
 ### Fixed
